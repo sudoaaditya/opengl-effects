@@ -1,2 +1,5 @@
 Log file created successfully
-Initialization Successful!..
+Choose Pixel Format Successful!!..	{Index = 10}
+SetPixelFormat Successful!
+wglMakeCurrent Successful!.
+glewInit Failed!..
