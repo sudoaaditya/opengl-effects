@@ -294,36 +294,35 @@ void ToggleFullScreen(void){
 
 int initialize() {
 
-    // funs & vars
-    void resize(int, int);
+    //fun & var
+    void resize(int,int);
     void uninitialize(void);
-    bool loadTexture(GLuint*, TCHAR[]);
 
     PIXELFORMATDESCRIPTOR pfd;
     int iPixelFormatIndex = 0;
     GLenum result;
-
-    // shader compilation
+    //For Shader Comiple
     GLint iShaderCompileStatus = 0;
-    GLint iShaderInfoLen = 0;
+    GLint iShaderInfoLogLen = 0;
     GLchar* szInfoLog = NULL;
 
     ZeroMemory(&pfd, sizeof(PIXELFORMATDESCRIPTOR));
 
-    pfd.nSize = sizeof(pfd);
+    pfd.nSize =  sizeof(pfd);
     pfd.nVersion = 1;
     pfd.dwFlags = PFD_DOUBLEBUFFER | PFD_SUPPORT_OPENGL | PFD_DRAW_TO_WINDOW;
     pfd.cColorBits = 32;
+    pfd.iPixelType = PFD_TYPE_RGBA;
     pfd.cRedBits = 8;
-    pfd.cGreenBits = 8;
     pfd.cBlueBits = 8;
+    pfd.cGreenBits = 8;
     pfd.cAlphaBits = 8;
     pfd.cDepthBits = 32;
 
     ghdc = GetDC(ghwnd);
 
     iPixelFormatIndex = ChoosePixelFormat(ghdc, &pfd);
-    if(iPixelFormatIndex == 0){
+    if(iPixelFormatIndex == 0) {
         return(-1);
     } else {
         fprintf(fptr, "Choose Pixel Format Successful!!..\t{Index = %d}\n", iPixelFormatIndex);
@@ -335,6 +334,13 @@ int initialize() {
         fprintf(fptr, "SetPixelFormat Successful!\n");
     }
 
+    ghrc = wglCreateContext(ghdc);
+    if(ghrc == NULL){
+        return(-3);
+    } else {
+        fprintf(fptr, "wglCreateContext Successsful!!..\n");
+    }
+
     if(wglMakeCurrent(ghdc, ghrc) == FALSE) {
         return(-4);
     }
@@ -343,13 +349,13 @@ int initialize() {
     }
 
     result = glewInit();
-    if(result != GLEW_OK) {
+    if(result != GLEW_OK){
         return(-5);
     } else {
-        fprintf(fptr, "glewInit Successful!.\n");
+        fprintf(fptr, "glewInit Successful!..\n");
     }
 
-    return 0;
+    return (0);
 }
 
 void resize (int width, int height) {
