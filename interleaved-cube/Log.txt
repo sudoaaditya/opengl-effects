@@ -4,4 +4,10 @@ SetPixelFormat Successful!
 wglCreateContext Successsful!!..
 wglMakeCurrent Successful!.
 glewInit Successful!..
+Vertex Shader Compiled Successfully!
+Fragment Shader Compiled Successfully!
+Marble Texture Loaded Sussessfully!
 Initialization Successful!..
+ b4 b4 In if 
+
+File Closed Successfully!!..
