@@ -52,6 +52,7 @@ GLuint kdUniform;
 GLuint ksUniform;
 GLuint matShineUniform;
 GLuint lKeyPressedUniform;
+GLuint tKeyPressedUniform;
 GLuint samplerUniform;
 GLuint mvpUniform = 0;
 
@@ -65,6 +66,7 @@ GLfloat materialSpecular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat materialShininess = 128.0f;
 GLfloat lightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f };
 bool bLighting = false;
+bool bTexture = false;
 GLuint iMarbleTexture = 0;
 
 LRESULT CALLBACK MyCallBack(HWND, UINT, WPARAM, LPARAM);
@@ -227,6 +229,11 @@ LRESULT CALLBACK MyCallBack(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam) 
                     case 'l':
                     case 'L':
                         bLighting = !bLighting;
+                        break;
+
+                    case 't':
+                    case 'T':
+                        bTexture = !bTexture;
                         break;
                 }
             break;
@@ -423,12 +430,17 @@ int initialize() {
         "#version 460 core" \
         "\n" \
         "uniform sampler2D u_sampler;" \
+        "uniform int u_tPressed;" \
         "in vec4 out_color;" \
         "in vec2 out_texCoord;" \
         "out vec4 FragColor;" \
         "void main(void) {" \
-        "   vec4 tex = texture(u_sampler, out_texCoord);" \
-        "   FragColor = tex * out_color;" \
+        "   vec4 color = out_color;" \
+        "   if(u_tPressed == 1) {" \
+        "       vec4 tex = texture(u_sampler, out_texCoord);" \
+        "       color *= tex;" \
+        "   }" \
+        "   FragColor = color;" \
         "}";
 
     glShaderSource(gFragmentShaderObject, 1, (const GLchar**)&fragmentShaderSourceCode, NULL);
@@ -523,6 +535,7 @@ int initialize() {
     viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
     projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
     samplerUniform = glGetUniformLocation(gProgramShaderObject, "u_sampler");
+    tKeyPressedUniform = glGetUniformLocation(gProgramShaderObject, "u_tPressed");
 
     // Arrays
     const GLfloat cubeVertices[] = { 
@@ -720,10 +733,16 @@ void display () {
     } */
 
     glBindVertexArray(vao_cube);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, iMarbleTexture);
-    glUniform1i(samplerUniform, 0);
+    
+    if(bTexture) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, iMarbleTexture);
+        glUniform1i(samplerUniform, 0);
+        glUniform1i(tKeyPressedUniform, 1);
+    } else {
+        glActiveTexture(0);
+        glUniform1i(tKeyPressedUniform, 0);
+    }
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glDrawArrays(GL_TRIANGLE_FAN, 4, 4);
