@@ -53,6 +53,7 @@ GLuint ksUniform;
 GLuint matShineUniform;
 GLuint lKeyPressedUniform;
 GLuint samplerUniform;
+GLuint mvpUniform = 0;
 
 // Light Parameters
 GLfloat lightAmbient[] = { 0.25f, 0.25f, 0.25f, 0.0f };
@@ -355,46 +356,35 @@ int initialize() {
         fprintf(fptr, "glewInit Successful!..\n");
     }
 
-    // create program
+    //Shader Code : Define Vertex Shader Object
     gVertexShaderObject = glCreateShader(GL_VERTEX_SHADER);
 
-    const GLchar *vertexShaderSource = 
+    // Write Vertex Shader Code!.
+    const GLchar *vertexShaderSourceCode = 
         "#version 460 core" \
-        "\n" \
         "\n" \
         "in vec4 vPosition;" \
         "in vec4 vColor;" \
-        "in vec3 vNormal;" \
         "in vec2 vTexCoord;" \
+        "out vec4 out_color;" \
+        "out vec2 out_texCoord;" \
         "uniform mat4 u_modelMatrix;" \
         "uniform mat4 u_viewMatrix;" \
         "uniform mat4 u_projMatrix;" \
-        "uniform int u_lPressed;" \
-        "uniform vec4 u_lightPosition;" \
-        "out vec3 t_normal;" \
-        "out vec2 out_texCoord;" \
-        "out vec4 out_color;" \
-        "out vec3 out_viewVector;" \
-        "out vec3 out_lightDirection;" \
-        "void main (void) {" \
-        "   if(u_lPressed == 1) {" \
-        "       vec4 eyeCoords = u_viewMatrix * vPosition;" \
-        "       t_normal = mat3(u_viewMatrix * u_modelMatrix) * vNormal;" \
-        "       out_lightDirection = vec3(u_lightPosition - eyeCoords);" \
-        "       out_viewVector = vec3(-eyeCoords.xyz);" \
-        "   }" \
-        "   gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * vPosition;" \
-        "   out_color = vColor;" \
-        "   out_texCoord = vTexCoord;" \
+        "void main(void)" \
+        "{" \
+        "gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * vPosition;" \
+        "out_color = vColor;" \
+        "out_texCoord = vTexCoord;" \
         "}";
 
-    // Specify above code to vertex shader object
-    glShaderSource(gVertexShaderObject, 1, (const GLchar**)&vertexShaderSource, NULL);
+    // Specify above code to VertexShader Object.
+    glShaderSource(gVertexShaderObject, 1, (const GLchar**)&vertexShaderSourceCode, NULL);
 
-    // compile Vertex Shader
+    //Compile The Vertex Shader.
     glCompileShader(gVertexShaderObject);
 
-    //Error checking
+    //Error Checking.
     glGetShaderiv(gVertexShaderObject, GL_COMPILE_STATUS, &iShaderCompileStatus);
 
     if(iShaderCompileStatus == GL_FALSE) {
@@ -406,14 +396,12 @@ int initialize() {
             if(szInfoLog != NULL) {
                 GLsizei written;
 
-                glGetShaderInfoLog(
-                    gVertexShaderObject,
+                glGetShaderInfoLog(gVertexShaderObject,
                     iShaderInfoLogLen,
                     &written,
-                    szInfoLog
-            );
+                    szInfoLog);
 
-                fprintf(fptr, "Vertex Shader Log:: \n %s\n", szInfoLog);
+                fprintf(fptr, "Vertex Shader Log::\n %s\n", szInfoLog);
 
                 free(szInfoLog);
                 uninitialize();
@@ -422,62 +410,31 @@ int initialize() {
             }
         }
     } else {
-        fprintf(fptr, "Vertex Shader Compiled Successfully!\n");
+        fprintf(fptr, "Vertex Shader Compiled Successfully!!..\n");
     }
 
-    // Fragment Shader
+    //Fragment Shader : create Shader Objet!
     iShaderCompileStatus = 0;
     iShaderInfoLogLen = 0;
     szInfoLog = NULL;
     gFragmentShaderObject = glCreateShader(GL_FRAGMENT_SHADER);
 
-    const GLchar *fragmentShaderSource = 
+    const GLchar *fragmentShaderSourceCode = 
         "#version 460 core" \
         "\n" \
-        "\n" \
-        "precision highp float;" \
-        "precision lowp int;" \
-        "uniform vec3 u_la;" \
-        "uniform vec3 u_ld;" \
-        "uniform vec3 u_ls;" \
-        "uniform vec3 u_ka;" \
-        "uniform vec3 u_kd;" \
-        "uniform vec3 u_ks;" \
         "uniform sampler2D u_sampler;" \
-        "uniform float u_matShine;" \
-        "uniform int u_lPressed;" \
-        "out vec4 FragColor;" \
-        "in vec3 t_normal;" \
-        "in vec3 out_lightDirection;" \
-        "in vec3 out_viewVector;" \
-        "in vec2 out_texCoord;" \
         "in vec4 out_color;" \
+        "in vec2 out_texCoord;" \
+        "out vec4 FragColor;" \
         "void main(void) {" \
-        "   vec3 phong_ads_light;" \
-        "   if(u_lPressed == 1) {" \
-        "       vec3 n_tNormal = normalize(t_normal);" \
-        "       vec3 n_lightDirection = normalize(out_lightDirection);" \
-        "       vec3 n_viewVector = normalize(out_viewVector);" \
-        "       float tn_dot_ld = max(dot(n_lightDirection, n_tNormal), 0.0);" \
-        "       vec3 reflectionVector = reflect(-n_lightDirection, n_tNormal);" \
-        "       vec3 ambient = u_la * u_ka;" \
-        "       vec3 diffuse = u_ld * u_kd * tn_dot_ld;" \
-        "       vec3 specular = u_ls * u_ks * pow(max(dot(reflectionVector, n_viewVector), 0.0), u_matShine);" \
-        "       phong_ads_light = ambient + diffuse + specular;" \
-        "   } else {" \
-        "       phong_ads_light = vec3(1.0, 1.0, 1.0);" \
-        "   }" \
-        "   vec3 tex = vec3(texture(u_sampler, out_texCoord));" \
-        "   FragColor = vec4((tex * vec3(out_color) * phong_ads_light), 1.0);"
+        "   vec4 tex = texture(u_sampler, out_texCoord);" \
+        "   FragColor = tex * out_color;" \
         "}";
 
-    // Specify above code to fragment shader object
-    glShaderSource(gFragmentShaderObject, 1, (const GLchar**)&fragmentShaderSource, NULL);
+    glShaderSource(gFragmentShaderObject, 1, (const GLchar**)&fragmentShaderSourceCode, NULL);
 
-    // compile fragment Shader
     glCompileShader(gFragmentShaderObject);
 
-    //Error checking
     glGetShaderiv(gFragmentShaderObject, GL_COMPILE_STATUS, &iShaderCompileStatus);
 
     if(iShaderCompileStatus == GL_FALSE) {
@@ -485,19 +442,15 @@ int initialize() {
 
         if(iShaderInfoLogLen > 0) {
             szInfoLog = (GLchar*)malloc(iShaderInfoLogLen);
-
             if(szInfoLog != NULL) {
-                GLsizei written;
+                GLint written;
 
-                glGetShaderInfoLog(
-                    gFragmentShaderObject,
-                    iShaderInfoLogLen,
-                    &written,
-                    szInfoLog
-            );
+                glGetShaderInfoLog(gVertexShaderObject,
+                                iShaderInfoLogLen,
+                                &written,
+                                szInfoLog);
 
-                fprintf(fptr, "Fragment Shader Log:: \n %s\n", szInfoLog);
-
+                fprintf(fptr,"Fragment Shader Log :\n %s\n",szInfoLog);
                 free(szInfoLog);
                 uninitialize();
                 DestroyWindow(ghwnd);
@@ -505,28 +458,28 @@ int initialize() {
             }
         }
     } else {
-        fprintf(fptr, "Fragment Shader Compiled Successfully!\n");
+        fprintf(fptr, "Fragement ShaderCompiled Successfully!!..\n");
     }
 
-    // now create program
+    //Noe Create Program
     GLint iProgLinkStatus = 0;
     GLint iProgLogLen = 0;
-    GLchar *szPorgLog = NULL;
+    GLchar* szProgLog = NULL;
+    //Create Shader Program Shader Object!
+    gProgramShaderObject = glCreateProgram();
 
-    // create shader program
-    gProgramShaderObject - glCreateProgram();
-
-    // attach vertex shader project
+    //Attach VS to Shader Prog
     glAttachShader(gProgramShaderObject, gVertexShaderObject);
-    // attach fragment shader
+
+    //Attach FS to Shader Prog
     glAttachShader(gProgramShaderObject, gFragmentShaderObject);
 
-    // Bind Attributes
+    //NOW BEFORE LINK : Prelinking Binding with Vertex Attribute
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_POSITION, "vPosition");
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_COLOR, "vColor");
-    glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_NORMAL, "vNormal");
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_TEXCOORD0, "vTexCoord");
 
+    //Now Link The Program
     glLinkProgram(gProgramShaderObject);
 
     glGetProgramiv(gProgramShaderObject, GL_LINK_STATUS, &iProgLinkStatus);
@@ -535,33 +488,26 @@ int initialize() {
         glGetProgramiv(gProgramShaderObject, GL_INFO_LOG_LENGTH, &iProgLogLen);
 
         if(iProgLogLen > 0) {
-            szPorgLog = (GLchar*)malloc(iProgLogLen);
+            szProgLog = (GLchar*)malloc(iProgLogLen);
 
-            if(szPorgLog != NULL) {
+            if(szProgLog != NULL) {
                 GLint written;
 
-                glGetProgramInfoLog(
-                    gProgramShaderObject, 
-                    iProgLogLen, 
-                    &written, 
-                    szPorgLog
-                );
+                glGetProgramInfoLog(gProgramShaderObject, iProgLogLen, &written, szProgLog);
 
-                fprintf(fptr, "Program Link Log:: \n%s\n", szPorgLog);
+                fprintf(fptr,"Program Link Log :\n %s\n",szProgLog);
 
                 uninitialize();
                 DestroyWindow(ghwnd);
                 exit(0);
             }
-        } 
+        }
     } else {
-        fprintf(fptr, "Program Linkage Successful!\n");
+        fprintf(fptr, "Program Linkage Successful!!\n");
     }
 
     // uniforms
-    modelUniform = glGetUniformLocation(gProgramShaderObject, "u_modelMatrix");
-    viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
-    projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
+    /*
     laUniform = glGetUniformLocation(gProgramShaderObject, "u_la");
     ldUniform = glGetUniformLocation(gProgramShaderObject, "u_ld");
     lsUniform = glGetUniformLocation(gProgramShaderObject, "u_ls");
@@ -571,21 +517,21 @@ int initialize() {
     matShineUniform = glGetUniformLocation(gProgramShaderObject, "u_matShine");
     lKeyPressedUniform = glGetUniformLocation(gProgramShaderObject, "u_lPressed");
     lightPosUniform = glGetUniformLocation(gProgramShaderObject, "u_lightPosition");
+     */
+
+    modelUniform = glGetUniformLocation(gProgramShaderObject, "u_modelMatrix");
+    viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
+    projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
     samplerUniform = glGetUniformLocation(gProgramShaderObject, "u_sampler");
 
     // Arrays
-    const GLfloat cubeVertices[] = {
-        -1.0f, 1.0f, 1.0f,  -1.0f, -1.0f, 1.0f,   1.0f, -1.0f, 1.0f,   1.0f, 1.0f, 1.0f, 
-		//right face
-		1.0f, 1.0f, 1.0f, 1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f,
-		//back face
-		1.0f, 1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 
-		//left face
-		- 1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f,
-		//top face
-		-1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f,
-		//bottom face
-		-1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f
+    const GLfloat cubeVertices[] = { 
+        1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f,
+        1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
+        1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f,
+        1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f,
+        -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, -1.0f
     };
 
     const GLfloat cubeNormals[] = {
@@ -626,14 +572,6 @@ int initialize() {
     glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    //Normals
-    glGenBuffers(1, &vbo_normal_cube);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_normal_cube);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(cubeNormals), cubeNormals, GL_STATIC_DRAW);
-    glVertexAttribPointer(AMK_ATTRIBUTE_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glEnableVertexAttribArray(AMK_ATTRIBUTE_NORMAL);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     //Color
     glGenBuffers(1, &vbo_color_cube);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_color_cube);
@@ -641,6 +579,15 @@ int initialize() {
     glVertexAttribPointer(AMK_ATTRIBUTE_COLOR, 3, GL_FLOAT, GL_FALSE, 0, NULL);
     glEnableVertexAttribArray(AMK_ATTRIBUTE_COLOR);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    /* //Normals
+    glGenBuffers(1, &vbo_normal_cube);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_normal_cube);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(cubeNormals), cubeNormals, GL_STATIC_DRAW);
+    glVertexAttribPointer(AMK_ATTRIBUTE_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray(AMK_ATTRIBUTE_NORMAL);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+     */
 
     //TexCoords
     glGenBuffers(1, &vbo_texture_cube);
@@ -671,7 +618,6 @@ int initialize() {
 }
 
 BOOL loadTexture(GLuint *texture, TCHAR imgResourceID[]) {
-
     HBITMAP hBitmap = NULL;
     BITMAP bmp;
     BOOL bStatus = FALSE;
@@ -744,12 +690,12 @@ void display () {
     rotateMat = mat4::identity();
     scaleMat = mat4::identity();
 
-    translateMat = translate(0.0f, 0.0f, -5.0f);
+    translateMat = translate(0.0f, 0.0f, -6.0f);
     scaleMat = scale(0.75f, 0.75f, 0.75f);
 
     rotateMat = rotate(fAngleCube, 1.0f, 0.0f, 0.0f);
-    rotateMat = rotate(fAngleCube, 0.0f, 1.0f, 0.0f);
-    rotateMat = rotate(fAngleCube, 0.0f, 0.0f, 1.0f);
+    rotateMat *= rotate(fAngleCube, 0.0f, 1.0f, 0.0f);
+    rotateMat *= rotate(fAngleCube, 0.0f, 0.0f, 1.0f);
 
     modelMat = modelMat * translateMat;
     modelMat = modelMat * scaleMat;
@@ -759,8 +705,7 @@ void display () {
     glUniformMatrix4fv(viewUniform, 1, GL_FALSE, viewMat);
     glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, perspectiveProjectionMatrix);
 
-
-    if(bLighting == 1) {
+    /* if(bLighting) {
         glUniform3fv(laUniform, 1, lightAmbient);
         glUniform3fv(ldUniform, 1, lightDiffuse);
         glUniform3fv(lsUniform, 1, lightSpecular);
@@ -772,7 +717,7 @@ void display () {
         glUniform1i(lKeyPressedUniform, 1);
     } else {
         glUniform1i(lKeyPressedUniform, 0);
-    }
+    } */
 
     glBindVertexArray(vao_cube);
 
@@ -795,7 +740,7 @@ void display () {
 
 void update() {
     
-    fAngleCube += 2.0f;
+    fAngleCube += 0.05f;
     if(fAngleCube >= 360.0f) {
         fAngleCube = 0.0f;
     }
