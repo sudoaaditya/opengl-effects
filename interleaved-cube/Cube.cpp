@@ -4,6 +4,7 @@
 #include <gl/GL.h>
 #include "../vmath/vmath.h"
 #include "Cube.h"
+#include "Clock.h"
 using namespace vmath;
 
 #define WIN_WIDTH 800
@@ -68,6 +69,7 @@ GLfloat lightPosition[] = { 0.0f, 0.0f, 2.0f, 1.0f };
 bool bLighting = false;
 bool bTexture = false;
 GLuint iMarbleTexture = 0;
+Clock myClock;
 
 LRESULT CALLBACK MyCallBack(HWND, UINT, WPARAM, LPARAM);
 
@@ -112,14 +114,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
     wndclass.hInstance = hInstance;
     wndclass.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(ICON_MORPHED));
     wndclass.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(ICON_MORPHED));
-    wndclass.hbrBackground = CreateSolidBrush(RGB(0, 0, 0));
+    wndclass.hbrBackground = CreateSolidBrush(RGB(1, 0, 0));
     wndclass.hCursor = LoadCursor(NULL, IDC_ARROW);
 
     RegisterClassEx(&wndclass);
 
     hwnd = CreateWindowEx(WS_EX_APPWINDOW,
             szAppName,
-            TEXT("OpenGL"),
+            TEXT("AMK_OpenGL"),
             WS_OVERLAPPEDWINDOW | 
             WS_CLIPSIBLINGS | 
             WS_CLIPCHILDREN | 
@@ -257,8 +259,7 @@ LRESULT CALLBACK MyCallBack(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam) 
 }
 
 void ToggleFullScreen(void){
-
-	//varaaaa
+	//var
 	MONITORINFO mi;
 
 	if(!gbFullScreen){
@@ -266,7 +267,7 @@ void ToggleFullScreen(void){
 		dwStyle = GetWindowLong(ghwnd, GWL_STYLE);
 
 		if(dwStyle & WS_OVERLAPPEDWINDOW) {
-            mi = {sizeof(MONITORINFO)};
+			mi = {sizeof(MONITORINFO)};
 			if(GetWindowPlacement(ghwnd, &wpPrev) && GetMonitorInfo(MonitorFromWindow(ghwnd, MONITORINFOF_PRIMARY), &mi)){
 
 				SetWindowLong(ghwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
@@ -281,7 +282,7 @@ void ToggleFullScreen(void){
 			}
 		}
 		ShowCursor(FALSE);
-		gbFullScreen = TRUE;
+		gbFullScreen = true;
 	}
 	else {
 
@@ -295,7 +296,7 @@ void ToggleFullScreen(void){
 			SWP_NOZORDER | SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE | SWP_NOOWNERZORDER);
 
 		ShowCursor(TRUE);
-		gbFullScreen = FALSE;
+		gbFullScreen = false;
 	}
 }
 
@@ -372,17 +373,28 @@ int initialize() {
         "\n" \
         "in vec4 vPosition;" \
         "in vec4 vColor;" \
+        "in vec3 vNormal;" \
         "in vec2 vTexCoord;" \
-        "out vec4 out_color;" \
-        "out vec2 out_texCoord;" \
         "uniform mat4 u_modelMatrix;" \
         "uniform mat4 u_viewMatrix;" \
         "uniform mat4 u_projMatrix;" \
-        "void main(void)" \
-        "{" \
-        "gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * vPosition;" \
-        "out_color = vColor;" \
-        "out_texCoord = vTexCoord;" \
+        "uniform int u_lPressed;" \
+        "uniform vec4 u_lightPosition;" \
+        "out vec4 out_color;" \
+        "out vec2 out_texCoord;" \
+        "out vec3 out_normal;" \
+        "out vec3 out_viewerVector;" \
+        "out vec3 out_lightDirection;" \
+        "void main(void) {" \
+        "   if(u_lPressed == 1) {" \
+        "       vec4 eyeCoords = u_viewMatrix * u_modelMatrix * vPosition;" \
+        "       out_normal = mat3(u_viewMatrix * u_modelMatrix) * vNormal;" \
+        "       out_lightDirection = vec3(u_lightPosition - eyeCoords);" \
+        "       out_viewerVector = vec3(-eyeCoords.xyz);" \
+        "   }" \
+        "   gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * vPosition;" \
+        "   out_color = vColor;" \
+        "   out_texCoord = vTexCoord;" \
         "}";
 
     // Specify above code to VertexShader Object.
@@ -429,18 +441,44 @@ int initialize() {
     const GLchar *fragmentShaderSourceCode = 
         "#version 460 core" \
         "\n" \
+        "uniform vec3 u_la;" \
+        "uniform vec3 u_ld;" \
+        "uniform vec3 u_ls;" \
+        "uniform vec3 u_ka;" \
+        "uniform vec3 u_kd;" \
+        "uniform vec3 u_ks;" \
         "uniform sampler2D u_sampler;" \
+        "uniform float u_matShine;" \
         "uniform int u_tPressed;" \
+        "uniform int u_lPressed;" \
         "in vec4 out_color;" \
         "in vec2 out_texCoord;" \
+        "in vec3 out_normal;" \
+        "in vec3 out_lightDirection;" \
+        "in vec3 out_viewerVector;" \
         "out vec4 FragColor;" \
         "void main(void) {" \
-        "   vec4 color = out_color;" \
-        "   if(u_tPressed == 1) {" \
-        "       vec4 tex = texture(u_sampler, out_texCoord);" \
-        "       color *= tex;" \
+        "   vec3 phong_ads_light;" \
+        "   if(u_lPressed == 1) {" 
+        "       vec3 n_normal = normalize(out_normal);" \
+        "       vec3 n_lightDirection = normalize(out_lightDirection);" \
+        "       vec3 n_viewerVector = normalize(out_viewerVector);" \
+        "       float tn_dot_ld = max(dot(n_lightDirection, n_normal), 0.0);" \
+        "       vec3 reflectionVector = reflect(-n_lightDirection, n_normal);"  \
+        "       vec3 ambient = u_la * u_ka;" \
+        "       vec3 diffuse = u_ld * u_kd * tn_dot_ld;" \
+        "       vec3 specular = u_ls * u_ks * pow(max(dot(reflectionVector, n_viewerVector), 0.0), u_matShine);" \
+        "       phong_ads_light = ambient + diffuse + specular;" \
+        "   } else {" \
+        "       phong_ads_light = vec3(1.0, 1.0, 1.0);" \
         "   }" \
-        "   FragColor = color;" \
+        "   if(u_tPressed == 1) {" \
+        "       vec3 tex = texture(u_sampler, out_texCoord).rgb;" \
+        "       phong_ads_light *= out_color.rgb * tex;" \
+        "   } else {" \
+        "       phong_ads_light *= out_color.rgb;" \
+        "   }"
+        "   FragColor = vec4(phong_ads_light, 1.0);" \
         "}";
 
     glShaderSource(gFragmentShaderObject, 1, (const GLchar**)&fragmentShaderSourceCode, NULL);
@@ -489,6 +527,7 @@ int initialize() {
     //NOW BEFORE LINK : Prelinking Binding with Vertex Attribute
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_POSITION, "vPosition");
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_COLOR, "vColor");
+    glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_NORMAL, "vNormal");
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_TEXCOORD0, "vTexCoord");
 
     //Now Link The Program
@@ -519,7 +558,11 @@ int initialize() {
     }
 
     // uniforms
-    /*
+    modelUniform = glGetUniformLocation(gProgramShaderObject, "u_modelMatrix");
+    viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
+    projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
+    samplerUniform = glGetUniformLocation(gProgramShaderObject, "u_sampler");
+    tKeyPressedUniform = glGetUniformLocation(gProgramShaderObject, "u_tPressed");
     laUniform = glGetUniformLocation(gProgramShaderObject, "u_la");
     ldUniform = glGetUniformLocation(gProgramShaderObject, "u_ld");
     lsUniform = glGetUniformLocation(gProgramShaderObject, "u_ls");
@@ -529,13 +572,6 @@ int initialize() {
     matShineUniform = glGetUniformLocation(gProgramShaderObject, "u_matShine");
     lKeyPressedUniform = glGetUniformLocation(gProgramShaderObject, "u_lPressed");
     lightPosUniform = glGetUniformLocation(gProgramShaderObject, "u_lightPosition");
-     */
-
-    modelUniform = glGetUniformLocation(gProgramShaderObject, "u_modelMatrix");
-    viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
-    projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
-    samplerUniform = glGetUniformLocation(gProgramShaderObject, "u_sampler");
-    tKeyPressedUniform = glGetUniformLocation(gProgramShaderObject, "u_tPressed");
 
     // Arrays
     const GLfloat cubeVertices[] = { 
@@ -548,12 +584,12 @@ int initialize() {
     };
 
     const GLfloat cubeNormals[] = {
-        0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-		1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f,
-        -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+        0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f, 1.0f,  
+        0.0f, 0.0f, -1.0f,  0.0f, 0.0f, -1.0f,  0.0f, 0.0f, -1.0f,  0.0f, 0.0f, -1.0f,  
+        0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  0.0f, 1.0f, 0.0f,  
+        0.0f, -1.0f, 0.0f,  0.0f, -1.0f, 0.0f,  0.0f, -1.0f, 0.0f,  0.0f, -1.0f, 0.0f,  
+        1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 0.0f, 0.0f,  
+        -1.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0f,  -1.0f, 0.0f, 0.0f  
     };
 
     const GLfloat cubeColor[] = { 
@@ -593,14 +629,14 @@ int initialize() {
     glEnableVertexAttribArray(AMK_ATTRIBUTE_COLOR);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    /* //Normals
+    //Normals
     glGenBuffers(1, &vbo_normal_cube);
     glBindBuffer(GL_ARRAY_BUFFER, vbo_normal_cube);
     glBufferData(GL_ARRAY_BUFFER, sizeof(cubeNormals), cubeNormals, GL_STATIC_DRAW);
     glVertexAttribPointer(AMK_ATTRIBUTE_NORMAL, 3, GL_FLOAT, GL_FALSE, 0, NULL);
     glEnableVertexAttribArray(AMK_ATTRIBUTE_NORMAL);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-     */
+    
 
     //TexCoords
     glGenBuffers(1, &vbo_texture_cube);
@@ -626,6 +662,8 @@ int initialize() {
     perspectiveProjectionMatrix = mat4::identity();
 
     resize(WIN_WIDTH, WIN_HEIGHT);
+
+    myClock.start();
 
     return (0);
 }
@@ -718,7 +756,7 @@ void display () {
     glUniformMatrix4fv(viewUniform, 1, GL_FALSE, viewMat);
     glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, perspectiveProjectionMatrix);
 
-    /* if(bLighting) {
+    if(bLighting) {
         glUniform3fv(laUniform, 1, lightAmbient);
         glUniform3fv(ldUniform, 1, lightDiffuse);
         glUniform3fv(lsUniform, 1, lightSpecular);
@@ -730,7 +768,7 @@ void display () {
         glUniform1i(lKeyPressedUniform, 1);
     } else {
         glUniform1i(lKeyPressedUniform, 0);
-    } */
+    }
 
     glBindVertexArray(vao_cube);
     
@@ -758,8 +796,8 @@ void display () {
 }
 
 void update() {
-    
-    fAngleCube += 0.05f;
+    float elapsedTime = (float) myClock.getElapsedTime();
+    fAngleCube = fmod((elapsedTime * 30.0f), 360.0f);
     if(fAngleCube >= 360.0f) {
         fAngleCube = 0.0f;
     }
@@ -827,8 +865,6 @@ void uninitialize() {
                 &iShaderCnt, 
                 pShaders
             );
-
-            fprintf(fptr, "In if \n");
 
             for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
                 glDetachShader(gProgramShaderObject, pShaders[iShaderNo]);
