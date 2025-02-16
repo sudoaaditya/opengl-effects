@@ -4,7 +4,7 @@
 #include <gl/GL.h>
 #include "../vmath/vmath.h"
 #include "Cube.h"
-#include "Clock.h"
+#include "clockUtils/Clock.h"
 using namespace vmath;
 
 #define WIN_WIDTH 800

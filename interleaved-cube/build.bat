@@ -4,7 +4,7 @@ del *.txt
 
 cls
 
-cl.exe /c /EHsc /I C:\glew\include Cube.cpp Clock.cpp
+cl.exe /c /EHsc /I C:\glew\include Cube.cpp clockUtils\Clock.cpp
 
 rc.exe TexResource.rc
 
