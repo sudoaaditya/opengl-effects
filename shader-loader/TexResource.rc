@@ -1,0 +1,3 @@
+#include "Cube.h"
+
+ICON_MORPHED ICON morphed.ico 
