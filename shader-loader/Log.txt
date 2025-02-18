@@ -1,0 +1,16 @@
+Log file created successfully
+Choose Pixel Format Successful!!..	{Index = 10}
+SetPixelFormat Successful!
+wglCreateContext Successsful!!..
+wglMakeCurrent Successful!.
+glewInit Successful!..
+File opened ./shaders/vertex.vert 
+Shader compilation successful: ( ./shaders/vertex.vert )
+File opened ./shaders/fragment.frag 
+Shader compilation successful: ( ./shaders/fragment.frag )
+Program linkage successful
+Initialization Successful!..
+Detached Shader: 2
+Detached Shader: 3
+
+File Closed Successfully!!..

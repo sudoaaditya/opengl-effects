@@ -1,7 +1,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#define GLEW_STATIC
 #include <gl/glew.h>
 #include <gl/GL.h>
 #include "LoadShaders.h"
@@ -13,23 +12,16 @@
 extern "C" {
 #endif
 
-static const GLchar* ReadShader (const char *filename) {
+static const GLchar* ReadShader (const char *filename, FILE *fptr) {
 
-    #ifdef WIN32
-        FILE *infile;
-        fopen_s(&infile, filename, "rb");
+    FILE *infile = fopen(filename, "rb");
 
-    #else
-        FILE *infile = fopen(filename, "rb");
-
-    #endif // WIN32
-
-        if(!infile) {
-    #ifdef _DEBUG
-            std::cerr << "Uable to open file '" << filename << "'" << std::endl;
-    #endif
-            return NULL;        
-        }
+    if(infile == NULL) {
+        fprintf(fptr, "Uable to open file %s \n", filename);
+        return NULL;        
+    } else {
+        fprintf(fptr, "File opened %s \n", filename);
+    }
 
     fseek(infile, 0, SEEK_END);
     int len = ftell(infile);
@@ -45,7 +37,7 @@ static const GLchar* ReadShader (const char *filename) {
     return const_cast<const GLchar*>(source);
 }
 
-GLuint LoadShaders (ShaderInfo *shaders) {
+GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
     
     if(shaders == NULL) {
         return 0;
@@ -60,7 +52,8 @@ GLuint LoadShaders (ShaderInfo *shaders) {
 
         entry->shader = shader;
 
-        const GLchar* source = ReadShader(entry->filename);
+        const GLchar* source = ReadShader(entry->filename, fptr);
+
         if(source == NULL) {
             for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
                 glDeleteShader( entry->shader );
@@ -79,15 +72,15 @@ GLuint LoadShaders (ShaderInfo *shaders) {
         glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
 
         if(!compiled) {
-        #ifdef _DEBUG
             GLsizei len;
             glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
             GLchar *log = new GLchar[len+1];
             glGetShaderInfoLog(shader, len, &len, log);
-            std::cerr << "Shader compilation failed: " << "(" << entry->filename << "(" << log << std::endl;
+            fprintf(fptr, "Shader compilation failed: ( %s ) -> %s \n", entry->filename, log);
             delete [] log;
-        #endif // DEBUG
             return 0;
+        } else {
+            fprintf(fptr, "Shader compilation successful: ( %s )\n", entry->filename);
         }
 
         glAttachShader(program, shader);
@@ -96,7 +89,7 @@ GLuint LoadShaders (ShaderInfo *shaders) {
 
     glLinkProgram(program);
 
-    GLint linked;
+    GLint linked = 0;
     glGetProgramiv(program, GL_LINK_STATUS, &linked);
 
     for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
@@ -105,16 +98,16 @@ GLuint LoadShaders (ShaderInfo *shaders) {
     }
 
     if(!linked) {
-    #ifdef _DEBUG
         GLsizei len;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &len);
 
         GLchar *log = new GLchar[len + 1];
         glGetProgramInfoLog(program, len, &len, log);
-        std::cerr << "Shader linkage failed: " << log << std::endl;
+        fprintf(fptr, "Program linkage failed: %s \n", log);
         delete [] log;
-    #endif //_DEBUG
         return 0;
+    } else {
+        fprintf(fptr, "Program linkage successful\n");
     }
 
     return program;

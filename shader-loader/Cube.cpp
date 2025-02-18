@@ -2,10 +2,12 @@
 #include <stdio.h>
 #include <gl/glew.h>
 #include <gl/GL.h>
+
 #include "../vmath/vmath.h"
 #include "Cube.h"
 #include "clockUtils/Clock.h"
 #include "shaderUtils/LoadShaders.h"
+
 using namespace vmath;
 
 #define WIN_WIDTH 800
@@ -333,12 +335,13 @@ int initialize() {
     }
 
     //Shader Code : Define Vertex Shader Object
+
     ShaderInfo shaders[] = {
-        { GL_VERTEX_SHADER, "shader/vertex.vert" },
-        { GL_FRAGMENT_SHADER, "shader/fragment.frag" },
+        { GL_VERTEX_SHADER, "./shaders/vertex.vert" },
+        { GL_FRAGMENT_SHADER, "./shaders/fragment.frag" },
     };
 
-    gProgramShaderObject = LoadShaders(shaders);
+    gProgramShaderObject = LoadShaders(shaders, fptr);
 
     //NOW BEFORE LINK : Prelinking Binding with Vertex Attribute
     glBindAttribLocation(gProgramShaderObject, AMK_ATTRIBUTE_POSITION, "vPosition");
