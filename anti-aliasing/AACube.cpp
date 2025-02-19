@@ -356,8 +356,8 @@ int initialize() {
 
     //Shader Code : Define Vertex Shader Object
     ShaderInfo shaders[] = {
-        { GL_VERTEX_SHADER, "./shaders/color-shaders/vertex.vert" },
-        { GL_FRAGMENT_SHADER, "./shaders/color-shaders/fragment.frag" },
+        { GL_VERTEX_SHADER, "./shaders/anti-vertex.vert" },
+        { GL_FRAGMENT_SHADER, "./shaders/anti-fragment.frag" },
     };
 
     gProgramShaderObject = LoadShaders(shaders, fptr);
@@ -372,6 +372,7 @@ int initialize() {
     projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
 
     fprintf(fptr, "At Second shader config\n");
+    fflush(fptr);
 
     // Arrays
     const GLfloat cubeVertices[] = { 
@@ -415,8 +416,8 @@ int initialize() {
 
     // Post Processing Shader
     ShaderInfo postShaders[] = {
-        { GL_VERTEX_SHADER, "./shaders/post-processing/vertex.vert" },
-        { GL_FRAGMENT_SHADER, "./shaders/post-processing/fragment.frag" },
+        { GL_VERTEX_SHADER, "./shaders/post-vertex.vert" },
+        { GL_FRAGMENT_SHADER, "./shaders/post-fragment.frag" },
     };
 
     gProgramPostProcShaderObject = LoadShaders(postShaders, fptr);
@@ -499,7 +500,7 @@ int initialize() {
     /* glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL) */;
+    glDepthFunc(GL_LEQUAL); */
 
     perspectiveProjectionMatrix = mat4::identity();
 
@@ -536,7 +537,6 @@ void display () {
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
 
     // Step 1: draw scene in multisampled buffer
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);

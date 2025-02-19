@@ -4,7 +4,7 @@ SetPixelFormat Successful!
 wglCreateContext Successsful!!..
 wglMakeCurrent Successful!.
 glewInit Successful!..
-File opened ./shaders/color-shaders/vertex.vert 
-Shader compilation successful: ( ./shaders/color-shaders/vertex.vert )
-File opened ./shaders/color-shaders/fragment.frag 
-Shader compilation successful: ( ./shaders/color-shaders/fragment.frag )
+File opened ./shaders/anti-vertex.vert 
+Shader compilation successful: ( ./shaders/anti-vertex.vert )
+File opened ./shaders/anti-fragment.frag 
+Shader compilation successful: ( ./shaders/anti-fragment.frag )
