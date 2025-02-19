@@ -36,17 +36,24 @@ FILE *fptr = NULL;
 WINDOWPLACEMENT wpPrev = { sizeof(WINDOWPLACEMENT) };
 
 // shader variables
-GLuint gVertexShaderObject = 0;
-GLuint gFragmentShaderObject = 0;
 GLuint gProgramShaderObject = 0;
+GLuint gProgramPostProcShaderObject = 0;
+
+GLuint framebuffer = 0;
+GLuint rbo = 0;
+GLuint intermediateFBO = 0;
+GLuint screenTexture = 0;
+
 mat4 perspectiveProjectionMatrix;
 GLfloat fAngleCube = 0.0f;
 GLuint vao_cube, vbo_position_cube, vbo_color_cube;
+GLuint vao_quad, vbo_position_quad, vbo_texture_quad;
 
 // uniforms
 GLuint modelUniform;
 GLuint viewUniform;
 GLuint projectionUniform;
+GLuint samplerUniform;
 
 Clock myClock;
 
@@ -72,6 +79,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
         exit(0);
     } else {
         fprintf(fptr, "Log file created successfully\n");
+        fflush(fptr);
     }
 
     // Centered window
@@ -118,30 +126,37 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
     iRet = initialize();
     if(iRet == -1) {
         fprintf(fptr, "ChoosePixelFormat Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else if(iRet == -2) {
         fprintf(fptr, "SetPixelFormat Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else if(iRet == -3) {
         fprintf(fptr, "wglCreateContext Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else if(iRet == -4) {
         fprintf(fptr, "wglMakeCurrent Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else if(iRet == -5) {
         fprintf(fptr, "glewInit Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else if(iRet == -6) {
         fprintf(fptr, "Marble Texture Loading Failed!..\n");
+        fflush(fptr);
         DestroyWindow(hwnd);
     } else {
         fprintf(fptr, "Initialization Successful!..\n");
+        fflush(fptr);
     }
 
     ShowWindow(hwnd, iCmdShow);
     SetFocus(hwnd);
     SetForegroundWindow(hwnd);
-    ToggleFullScreen();
+    // ToggleFullScreen();
 
     while(!bDone) {
         if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -306,12 +321,14 @@ int initialize() {
         return(-1);
     } else {
         fprintf(fptr, "Choose Pixel Format Successful!!..\t{Index = %d}\n", iPixelFormatIndex);
+        fflush(fptr);
     }
 
     if(SetPixelFormat(ghdc, iPixelFormatIndex, &pfd) == FALSE) {
         return(-2);
     } else {
         fprintf(fptr, "SetPixelFormat Successful!\n");
+        fflush(fptr);
     }
 
     ghrc = wglCreateContext(ghdc);
@@ -319,12 +336,14 @@ int initialize() {
         return(-3);
     } else {
         fprintf(fptr, "wglCreateContext Successsful!!..\n");
+        fflush(fptr);
     }
 
     if(wglMakeCurrent(ghdc, ghrc) == FALSE) {
         return(-4);
     } else {
         fprintf(fptr, "wglMakeCurrent Successful!.\n");
+        fflush(fptr);
     }
 
     result = glewInit();
@@ -332,13 +351,13 @@ int initialize() {
         return(-5);
     } else {
         fprintf(fptr, "glewInit Successful!..\n");
+        fflush(fptr);
     }
 
     //Shader Code : Define Vertex Shader Object
-
     ShaderInfo shaders[] = {
-        { GL_VERTEX_SHADER, "./shaders/vertex.vert" },
-        { GL_FRAGMENT_SHADER, "./shaders/fragment.frag" },
+        { GL_VERTEX_SHADER, "./shaders/color-shaders/vertex.vert" },
+        { GL_FRAGMENT_SHADER, "./shaders/color-shaders/fragment.frag" },
     };
 
     gProgramShaderObject = LoadShaders(shaders, fptr);
@@ -351,6 +370,8 @@ int initialize() {
     modelUniform = glGetUniformLocation(gProgramShaderObject, "u_modelMatrix");
     viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
     projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
+
+    fprintf(fptr, "At Second shader config\n");
 
     // Arrays
     const GLfloat cubeVertices[] = { 
@@ -370,7 +391,6 @@ int initialize() {
         1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f,
         1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f
     };
-
 
     glGenVertexArrays(1, &vao_cube);
     glBindVertexArray(vao_cube);
@@ -393,10 +413,93 @@ int initialize() {
 
     glBindVertexArray(0);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    // Post Processing Shader
+    ShaderInfo postShaders[] = {
+        { GL_VERTEX_SHADER, "./shaders/post-processing/vertex.vert" },
+        { GL_FRAGMENT_SHADER, "./shaders/post-processing/fragment.frag" },
+    };
+
+    gProgramPostProcShaderObject = LoadShaders(postShaders, fptr);
+
+    //NOW BEFORE LINK : Prelinking Binding with Vertex Attribute
+    glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_POSITION, "aPosition");
+    glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_TEXCOORD0, "aTexCoords");
+
+    // uniforms
+    samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
+
+    const GLfloat quadPosition[] = { -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f };
+    const GLfloat quadTexCoords[] = { 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f };
+
+    glGenVertexArrays(1, &vao_quad);
+    glBindVertexArray(vao_quad);
+
+    glGenBuffers(1, &vbo_position_quad);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_position_quad);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadPosition), quadPosition, GL_STATIC_DRAW);
+    glVertexAttribPointer(AMK_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, 0 , NULL);
+    glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glGenBuffers(1, &vbo_texture_quad);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_texture_quad);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quadTexCoords), quadTexCoords, GL_STATIC_DRAW);
+    glVertexAttribPointer(AMK_ATTRIBUTE_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0 , NULL);
+    glEnableVertexAttribArray(AMK_ATTRIBUTE_TEXCOORD0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+
+    // Configure MSAA framebuffer
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    // Create a multisampled color attachment texture
+    GLuint textureColorBufferMultiSampled;
+    glGenTextures(1, &textureColorBufferMultiSampled);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
+    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, WIN_WIDTH, WIN_HEIGHT, GL_TRUE);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
+    // Create a multisampled renderbuffer for depth and stencil attachments
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, WIN_WIDTH, WIN_HEIGHT);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(fptr, "ERROR: Framebuffer is not complete!\n");
+        fflush(fptr);
+    } else {
+        fprintf(fptr, "Framebuffer is complete!\n");
+        fflush(fptr);
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    // Create intermediate fbo aka second post processing frame buffer
+    glGenFramebuffers(1, &intermediateFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
+    // create color attachment texture
+    glGenTextures(1, &screenTexture);
+    glBindTexture(GL_TEXTURE_2D, screenTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WIN_WIDTH, WIN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenTexture, 0);
+
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(fptr, "ERROR: Intermediate Framebuffer is not complete!\n");
+        fflush(fptr);
+    } else {
+        fprintf(fptr, "Intermediate Framebuffer is complete!\n");
+        fflush(fptr);
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    /* glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
+    glDepthFunc(GL_LEQUAL) */;
 
     perspectiveProjectionMatrix = mat4::identity();
 
@@ -431,7 +534,15 @@ void display () {
     mat4 rotateMat;
     mat4 scaleMat;
 
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+
+    // Step 1: draw scene in multisampled buffer
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 
     glUseProgram(gProgramShaderObject);
 
@@ -441,7 +552,7 @@ void display () {
     rotateMat = mat4::identity();
     scaleMat = mat4::identity();
 
-    translateMat = translate(0.0f, 0.0f, -6.0f);
+    translateMat = translate(0.0f, 0.0f, -7.0f);
     scaleMat = scale(1.2f, 1.2f, 1.2f);
 
     rotateMat = rotate(45.0f, 1.0f, 0.0f, 0.0f);
@@ -465,6 +576,28 @@ void display () {
     glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
     glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 
+    // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
+    glBlitFramebufferANGLE(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    glBindVertexArray(0);
+    glUseProgram(0);
+
+    // Step 3: Now render quad with scene's visual as it's texture
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_DEPTH_TEST);
+
+    glUseProgram(gProgramPostProcShaderObject);
+    glBindVertexArray(vao_quad);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, screenTexture);
+    glUniform1i(samplerUniform, 0);
+
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
     glBindVertexArray(0);
     glUseProgram(0);
 
@@ -472,11 +605,11 @@ void display () {
 }
 
 void update() {
-    float elapsedTime = (float) myClock.getElapsedTime();
+    /* float elapsedTime = (float) myClock.getElapsedTime();
     fAngleCube = fmod((elapsedTime * 30.0f), 360.0f);
     if(fAngleCube >= 360.0f) {
         fAngleCube = 0.0f;
-    }
+    } */
 }
 
 void uninitialize() {
@@ -535,6 +668,7 @@ void uninitialize() {
             for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
                 glDetachShader(gProgramShaderObject, pShaders[iShaderNo]);
                 fprintf(fptr, "Detached Shader: %ld\n", pShaders[iShaderNo]);
+                fflush(fptr);
                 pShaders[iShaderNo] = 0;
             }
             free(pShaders);
@@ -561,6 +695,7 @@ void uninitialize() {
 
     if(fptr) {
         fprintf(fptr, "\nFile Closed Successfully!!..\n");
+        fflush(fptr);
         fclose(fptr);
         fptr = NULL;
     }

@@ -18,9 +18,11 @@ static const GLchar* ReadShader (const char *filename, FILE *fptr) {
 
     if(infile == NULL) {
         fprintf(fptr, "Uable to open file %s \n", filename);
+        fflush(fptr);
         return NULL;        
     } else {
         fprintf(fptr, "File opened %s \n", filename);
+        fflush(fptr);
     }
 
     fseek(infile, 0, SEEK_END);
@@ -77,10 +79,12 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
             GLchar *log = new GLchar[len+1];
             glGetShaderInfoLog(shader, len, &len, log);
             fprintf(fptr, "Shader compilation failed: ( %s ) -> %s \n", entry->filename, log);
+            fflush(fptr);
             delete [] log;
             return 0;
         } else {
             fprintf(fptr, "Shader compilation successful: ( %s )\n", entry->filename);
+            fflush(fptr);
         }
 
         glAttachShader(program, shader);
@@ -104,10 +108,12 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
         GLchar *log = new GLchar[len + 1];
         glGetProgramInfoLog(program, len, &len, log);
         fprintf(fptr, "Program linkage failed: %s \n", log);
+        fflush(fptr);
         delete [] log;
         return 0;
     } else {
         fprintf(fptr, "Program linkage successful\n");
+        fflush(fptr);
     }
 
     return program;
