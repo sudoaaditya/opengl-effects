@@ -4,6 +4,8 @@ SetPixelFormat Successful!
 wglCreateContext Successsful!!..
 wglMakeCurrent Successful!.
 glewInit Successful!..
+
+LoadShaders
 File opened ./shaders/anti-vertex.vert 
 Shader compilation successful: ( ./shaders/anti-vertex.vert )
 File opened ./shaders/anti-fragment.frag 

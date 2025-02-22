@@ -18,6 +18,7 @@ typedef struct {
 
 
 GLuint LoadShaders ( ShaderInfo*, FILE* );
+GLuint DetachShaders ( GLuint, FILE* );
 
 
 #ifdef __cplusplus 

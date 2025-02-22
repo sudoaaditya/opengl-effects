@@ -39,11 +39,6 @@ WINDOWPLACEMENT wpPrev = { sizeof(WINDOWPLACEMENT) };
 GLuint gProgramShaderObject = 0;
 GLuint gProgramPostProcShaderObject = 0;
 
-GLuint framebuffer = 0;
-GLuint rbo = 0;
-GLuint intermediateFBO = 0;
-GLuint screenTexture = 0;
-
 mat4 perspectiveProjectionMatrix;
 GLfloat fAngleCube = 0.0f;
 GLuint vao_cube, vbo_position_cube, vbo_color_cube;
@@ -54,6 +49,11 @@ GLuint modelUniform;
 GLuint viewUniform;
 GLuint projectionUniform;
 GLuint samplerUniform;
+
+GLuint framebuffer = 0;
+GLuint renderbuffer = 0;
+GLuint intermediateFBO = 0;
+GLuint screenTexture = 0;
 
 Clock myClock;
 
@@ -371,9 +371,6 @@ int initialize() {
     viewUniform = glGetUniformLocation(gProgramShaderObject, "u_viewMatrix");
     projectionUniform = glGetUniformLocation(gProgramShaderObject, "u_projMatrix");
 
-    fprintf(fptr, "At Second shader config\n");
-    fflush(fptr);
-
     // Arrays
     const GLfloat cubeVertices[] = { 
         1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f,
@@ -451,7 +448,7 @@ int initialize() {
 
     glBindVertexArray(0);
 
-    // Configure MSAA framebuffer
+    // GLuint framebuffer;
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     // Create a multisampled color attachment texture
@@ -462,17 +459,18 @@ int initialize() {
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
     // Create a multisampled renderbuffer for depth and stencil attachments
-    glGenRenderbuffers(1, &rbo);
-    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    // GLuint renderbuffer;
+    glGenRenderbuffers(1, &renderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
     glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, WIN_WIDTH, WIN_HEIGHT);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
 
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         fprintf(fptr, "ERROR: Framebuffer is not complete!\n");
         fflush(fptr);
     } else {
-        fprintf(fptr, "Framebuffer is complete!\n");
+        fprintf(fptr, "\nFramebuffer is complete!\n");
         fflush(fptr);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -492,15 +490,15 @@ int initialize() {
         fprintf(fptr, "ERROR: Intermediate Framebuffer is not complete!\n");
         fflush(fptr);
     } else {
-        fprintf(fptr, "Intermediate Framebuffer is complete!\n");
+        fprintf(fptr, "Intermediate Framebuffer is complete!\n\n");
         fflush(fptr);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    /* glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL); */
+    glDepthFunc(GL_LEQUAL);
 
     perspectiveProjectionMatrix = mat4::identity();
 
@@ -538,11 +536,11 @@ void display () {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Step 1: draw scene in multisampled buffer
+   /*  // Step 1: draw scene in multisampled buffer
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST); */
 
     glUseProgram(gProgramShaderObject);
 
@@ -576,15 +574,15 @@ void display () {
     glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
     glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 
-    // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
+    /* // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
     glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
     glBlitFramebufferANGLE(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
+ */
     glBindVertexArray(0);
     glUseProgram(0);
 
-    // Step 3: Now render quad with scene's visual as it's texture
+/*     // Step 3: Now render quad with scene's visual as it's texture
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -599,7 +597,7 @@ void display () {
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glBindVertexArray(0);
-    glUseProgram(0);
+    glUseProgram(0); */
 
     SwapBuffers(ghdc);
 }
@@ -642,41 +640,41 @@ void uninitialize() {
         vao_cube = 0;
     }
 
-
     if(gProgramShaderObject) {
-        GLsizei iShaderCnt = 0;
-        GLsizei iShaderNo = 0;
-
-        glUseProgram(gProgramShaderObject);
-
-        glGetProgramiv(
-            gProgramShaderObject,
-            GL_ATTACHED_SHADERS,
-            &iShaderCnt
-        );
-
-        GLuint *pShaders = (GLuint*)malloc(iShaderCnt * sizeof(GLuint));
-
-        if(pShaders) {
-            glGetAttachedShaders(
-                gProgramShaderObject,
-                iShaderCnt, 
-                &iShaderCnt, 
-                pShaders
-            );
-
-            for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
-                glDetachShader(gProgramShaderObject, pShaders[iShaderNo]);
-                fprintf(fptr, "Detached Shader: %ld\n", pShaders[iShaderNo]);
-                fflush(fptr);
-                pShaders[iShaderNo] = 0;
-            }
-            free(pShaders);
+        GLuint iRet = DetachShaders(gProgramShaderObject, fptr);
+        if(iRet != 0) {
+            fprintf(fptr, "gProgramShaderObject: Failed to Detach Shaders!\n");
+            fflush(fptr);
+        } else {
+            fprintf(fptr, "gProgramShaderObject: Shaders Detached Successfully!\n\n");
+            fflush(fptr);
         }
+    }
 
-        glDeleteProgram(gProgramShaderObject);
-        gProgramShaderObject = 0;
-        glUseProgram(0);
+    if(vbo_texture_quad) {
+        glDeleteBuffers(1, &vbo_texture_quad);
+        vbo_texture_quad = 0;
+    }
+
+    if(vbo_position_quad) {
+        glDeleteBuffers(1, &vbo_position_quad);
+        vbo_position_quad = 0;
+    }
+
+    if(vao_quad) {
+        glDeleteVertexArrays(1, &vao_quad);
+        vao_quad = 0;
+    }
+
+    if(gProgramPostProcShaderObject) {
+        GLuint iRet = DetachShaders(gProgramPostProcShaderObject, fptr);
+        if(iRet != 0) {
+            fprintf(fptr, "gProgramPostProcShaderObject: Failed to Detach Shaders!\n");
+            fflush(fptr);
+        } else {
+            fprintf(fptr, "gProgramPostProcShaderObject: Shaders Detached Successfully!\n\n");
+            fflush(fptr);
+        }
     }
 
     if(ghrc == wglGetCurrentContext()) {

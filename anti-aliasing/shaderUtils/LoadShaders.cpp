@@ -45,6 +45,9 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
         return 0;
     }
 
+    fprintf(fptr, "\nLoadShaders\n");
+    fflush(fptr);
+
     GLuint program = glCreateProgram();
 
     ShaderInfo *entry = shaders;
@@ -117,6 +120,47 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
     }
 
     return program;
+}
+
+GLuint DetachShaders(GLuint program, FILE *fptr) {
+    if(!program) {
+        return -1;
+    }
+
+    GLsizei iShaderCnt = 0;
+    GLsizei iShaderNo = 0;
+
+    glUseProgram(program);
+
+    glGetProgramiv(
+        program,
+        GL_ATTACHED_SHADERS,
+        &iShaderCnt
+    );
+
+    GLuint *pShaders = (GLuint*)malloc(iShaderCnt * sizeof(GLuint));
+
+    if(pShaders) {
+        glGetAttachedShaders(
+            program,
+            iShaderCnt, 
+            &iShaderCnt, 
+            pShaders
+        );
+
+        for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
+            glDetachShader(program, pShaders[iShaderNo]);
+            fprintf(fptr, "Detached Shader: %ld\n", pShaders[iShaderNo]);
+            fflush(fptr);
+            pShaders[iShaderNo] = 0;
+        }
+        free(pShaders);
+    }
+
+    glDeleteProgram(program);
+    glUseProgram(0);
+
+    return 0;
 }
 
 #ifdef __cplusplus
