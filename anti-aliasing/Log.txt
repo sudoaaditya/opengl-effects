@@ -1,4 +1,5 @@
 Log file created successfully
+WIN WIDTH & HEIGHT 784, 561
 Choose Pixel Format Successful!!..	{Index = 10}
 SetPixelFormat Successful!
 wglCreateContext Successsful!!..
@@ -10,3 +11,41 @@ File opened ./shaders/anti-vertex.vert
 Shader compilation successful: ( ./shaders/anti-vertex.vert )
 File opened ./shaders/anti-fragment.frag 
 Shader compilation successful: ( ./shaders/anti-fragment.frag )
+Program linkage successful
+
+LoadShaders
+File opened ./shaders/post-vertex.vert 
+Shader compilation successful: ( ./shaders/post-vertex.vert )
+File opened ./shaders/post-fragment.frag 
+Shader compilation successful: ( ./shaders/post-fragment.frag )
+Program linkage successful
+
+Framebuffer is complete!
+Intermediate Framebuffer is complete!
+
+WIN WIDTH & HEIGHT 800, 600
+Initialization Successful!..
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
+WIN WIDTH & HEIGHT 800, 600
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
+WIN WIDTH & HEIGHT 800, 600
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
+WIN WIDTH & HEIGHT 800, 600
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
+WIN WIDTH & HEIGHT 800, 600
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
+Detached Shader: 2
+Detached Shader: 3
+gProgramShaderObject: Shaders Detached Successfully!
+
+Detached Shader: 5
+Detached Shader: 6
+gProgramPostProcShaderObject: Shaders Detached Successfully!
+
+
+File Closed Successfully!!..

@@ -49,11 +49,13 @@ GLuint modelUniform;
 GLuint viewUniform;
 GLuint projectionUniform;
 GLuint samplerUniform;
+GLuint mvpMatrixUniform;
 
 GLuint framebuffer = 0;
 GLuint renderbuffer = 0;
 GLuint intermediateFBO = 0;
 GLuint screenTexture = 0;
+GLuint textureColorBufferMultiSampled;
 
 Clock myClock;
 
@@ -358,6 +360,7 @@ int initialize() {
     ShaderInfo shaders[] = {
         { GL_VERTEX_SHADER, "./shaders/anti-vertex.vert" },
         { GL_FRAGMENT_SHADER, "./shaders/anti-fragment.frag" },
+        { GL_NONE , ""}
     };
 
     gProgramShaderObject = LoadShaders(shaders, fptr);
@@ -415,6 +418,7 @@ int initialize() {
     ShaderInfo postShaders[] = {
         { GL_VERTEX_SHADER, "./shaders/post-vertex.vert" },
         { GL_FRAGMENT_SHADER, "./shaders/post-fragment.frag" },
+        { GL_NONE , ""}
     };
 
     gProgramPostProcShaderObject = LoadShaders(postShaders, fptr);
@@ -425,9 +429,10 @@ int initialize() {
 
     // uniforms
     samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
+    mvpMatrixUniform = glGetUniformLocation(gProgramPostProcShaderObject, "mvpMatrix");
 
-    const GLfloat quadPosition[] = { -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f, 1.0f };
-    const GLfloat quadTexCoords[] = { 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f };
+    const GLfloat quadPosition[] = { 1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f };
+    const GLfloat quadTexCoords[] = { 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
 
     glGenVertexArrays(1, &vao_quad);
     glBindVertexArray(vao_quad);
@@ -448,18 +453,16 @@ int initialize() {
 
     glBindVertexArray(0);
 
-    // GLuint framebuffer;
+    // Configure MSAA framebuffer
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     // Create a multisampled color attachment texture
-    GLuint textureColorBufferMultiSampled;
     glGenTextures(1, &textureColorBufferMultiSampled);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
     glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, WIN_WIDTH, WIN_HEIGHT, GL_TRUE);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
     // Create a multisampled renderbuffer for depth and stencil attachments
-    // GLuint renderbuffer;
     glGenRenderbuffers(1, &renderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
     glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, WIN_WIDTH, WIN_HEIGHT);
@@ -516,6 +519,8 @@ void resize (int width, int height) {
 
     glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
+    fprintf(fptr, "WIN WIDTH & HEIGHT %d, %d\n", width, height);
+
     perspectiveProjectionMatrix = perspective(
         45.0f,
         ((GLfloat)width / (GLfloat)height),
@@ -536,11 +541,11 @@ void display () {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-   /*  // Step 1: draw scene in multisampled buffer
+    // Step 1: draw scene in multisampled buffer
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST); */
+    glEnable(GL_DEPTH_TEST);
 
     glUseProgram(gProgramShaderObject);
 
@@ -574,30 +579,43 @@ void display () {
     glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
     glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 
-    /* // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
+    // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
     glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
-    glBlitFramebufferANGLE(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
- */
-    glBindVertexArray(0);
-    glUseProgram(0);
+    glBlitFramebuffer(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
-/*     // Step 3: Now render quad with scene's visual as it's texture
+    // Step 3: Now render quad with scene's visual as it's texture
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
 
     glUseProgram(gProgramPostProcShaderObject);
+
+    modelMat = mat4::identity();
+    viewMat = mat4::identity();
+    translateMat = mat4::identity();
+    rotateMat = mat4::identity();
+    scaleMat = mat4::identity();
+    mat4 modelviewProjMat = mat4::identity();
+
+    translateMat = translate(0.0f, 0.0f, -1.0f);
+
+    modelMat = modelMat * translateMat;
+    
+    modelviewProjMat = perspectiveProjectionMatrix * viewMat * modelMat;
+
+    glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, modelviewProjMat);
+
     glBindVertexArray(vao_quad);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, screenTexture);
     glUniform1i(samplerUniform, 0);
 
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     glBindVertexArray(0);
-    glUseProgram(0); */
+    glUseProgram(0);
 
     SwapBuffers(ghdc);
 }
