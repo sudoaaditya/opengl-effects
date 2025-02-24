@@ -498,11 +498,11 @@ int initialize() {
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    /* glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
-
+ */
     perspectiveProjectionMatrix = mat4::identity();
 
     resize(WIN_WIDTH, WIN_HEIGHT);
