@@ -25,6 +25,8 @@ Intermediate Framebuffer is complete!
 
 WIN WIDTH & HEIGHT 800, 600
 Initialization Successful!..
+WIN WIDTH & HEIGHT 1536, 864
+WIN WIDTH & HEIGHT 784, 561
 Detached Shader: 2
 Detached Shader: 3
 gProgramShaderObject: Shaders Detached Successfully!
