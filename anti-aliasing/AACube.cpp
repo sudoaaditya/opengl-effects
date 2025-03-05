@@ -625,12 +625,12 @@ void display () {
         fprintf(fptr, "Warning: MSAA FBO might be empty!!\n");
         fflush(fptr);
     } */
-    // print all pixels in file
+    /* // print all pixels in file
     for (int i = 0; i < 3 * WIN_WIDTH * WIN_HEIGHT; i++) {
         fprintf(fptr, "%d ", pixels[i]);
         fflush(fptr);
     }
-
+ */
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glUseProgram(gProgramPostProcShaderObject);
