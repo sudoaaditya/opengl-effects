@@ -42,7 +42,7 @@ GLuint gProgramPostProcShaderObject = 0;
 mat4 perspectiveProjectionMatrix;
 GLfloat fAngleCube = 0.0f;
 GLuint vao_cube, vbo_position_cube, vbo_color_cube;
-GLuint vao_quad, vbo_position_quad, vbo_texture_quad;
+GLuint vao_quad, vbo_position_quad;
 
 // uniforms
 GLuint modelUniform;
@@ -55,7 +55,9 @@ GLuint framebuffer = 0;
 GLuint renderbuffer = 0;
 GLuint intermediateFBO = 0;
 GLuint screenTexture = 0;
-GLuint textureColorBufferMultiSampled;
+GLuint textureColorBufferMultiSampled = 0;
+
+unsigned int samples = 4;
 
 Clock myClock;
 
@@ -294,6 +296,7 @@ int initialize() {
     void resize(int,int);
     void uninitialize(void);
     BOOL loadTexture(GLuint*, TCHAR[]);
+    void glPrintError(char *);
 
     PIXELFORMATDESCRIPTOR pfd;
     int iPixelFormatIndex = 0;
@@ -429,27 +432,27 @@ int initialize() {
 
     // uniforms
     samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
-    mvpMatrixUniform = glGetUniformLocation(gProgramPostProcShaderObject, "mvpMatrix");
 
-    const GLfloat quadPosition[] = { 1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f };
-    const GLfloat quadTexCoords[] = { 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
+    float rectangleVertices[] = {
+        //  Coords   // texCoords
+        1.0f, -1.0f,  1.0f, 0.0f,
+        -1.0f, -1.0f,  0.0f, 0.0f,
+        -1.0f,  1.0f,  0.0f, 1.0f,
+
+        1.0f,  1.0f,  1.0f, 1.0f,
+        1.0f, -1.0f,  1.0f, 0.0f,
+        -1.0f,  1.0f,  0.0f, 1.0f
+    };
 
     glGenVertexArrays(1, &vao_quad);
-    glBindVertexArray(vao_quad);
-
-    glGenBuffers(1, &vbo_position_quad);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_position_quad);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadPosition), quadPosition, GL_STATIC_DRAW);
-    glVertexAttribPointer(AMK_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, 0 , NULL);
-    glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glGenBuffers(1, &vbo_texture_quad);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_texture_quad);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quadTexCoords), quadTexCoords, GL_STATIC_DRAW);
-    glVertexAttribPointer(AMK_ATTRIBUTE_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0 , NULL);
-    glEnableVertexAttribArray(AMK_ATTRIBUTE_TEXCOORD0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glGenBuffers(1, &vbo_position_quad);
+	glBindVertexArray(vao_quad);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo_position_quad);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), &rectangleVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
+	glVertexAttribPointer(AMK_ATTRIBUTE_POSITION, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(AMK_ATTRIBUTE_TEXCOORD0);
+	glVertexAttribPointer(AMK_ATTRIBUTE_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
     glBindVertexArray(0);
 
@@ -459,12 +462,8 @@ int initialize() {
     // Create a multisampled color attachment texture
     glGenTextures(1, &textureColorBufferMultiSampled);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
-    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGB, WIN_WIDTH, WIN_HEIGHT, GL_TRUE);
-    glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    // glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, WIN_WIDTH, WIN_HEIGHT, GL_TRUE);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
     // Create a multisampled renderbuffer for depth and stencil attachments
     glGenRenderbuffers(1, &renderbuffer);
@@ -493,6 +492,7 @@ int initialize() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenTexture, 0);
 
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -544,6 +544,8 @@ void display () {
     mat4 rotateMat;
     mat4 scaleMat;
 
+    void glPrintError(char *);
+
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -585,10 +587,25 @@ void display () {
     glDrawArrays(GL_TRIANGLE_FAN, 16, 4);
     glDrawArrays(GL_TRIANGLE_FAN, 20, 4);
 
+    glBindVertexArray(0);
+    glUseProgram(0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
     // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
     glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+    if (glCheckFramebufferStatus(GL_READ_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(fptr, "ERROR: GL_READ_FRAMEBUFFER is not complete!\n");
+        fflush(fptr);
+    } 
+
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
+    if (glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(fptr, "ERROR: GL_DRAW_FRAMEBUFFER is not complete!\n");
+        fflush(fptr);
+    } 
+    glPrintError("Step 2: Before BlitFramebuffer");
     glBlitFramebuffer(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    glPrintError("Step 2: After BlitFramebuffer");
 
     // Step 3: Now render quad with scene's visual as it's texture
     glUseProgram(0);
@@ -597,29 +614,33 @@ void display () {
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_DEPTH_TEST);
 
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+    unsigned char *pixels;
+    pixels = (unsigned char *)malloc(3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
+    memset(pixels, 0, 3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
+    glReadPixels(0, 0, WIN_WIDTH, WIN_WIDTH, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+    /* if (pixels[0] == 0 && pixels[1] == 0 && pixels[2] == 0) {
+        fprintf(fptr, "Warning: MSAA FBO might be empty!!\n");
+        fflush(fptr);
+    } */
+    // print all pixels in file
+    for (int i = 0; i < 3 * WIN_WIDTH * WIN_HEIGHT; i++) {
+        fprintf(fptr, "%d ", pixels[i]);
+        fflush(fptr);
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
     glUseProgram(gProgramPostProcShaderObject);
-
-    modelMat = mat4::identity();
-    viewMat = mat4::identity();
-    translateMat = mat4::identity();
-    rotateMat = mat4::identity();
-    scaleMat = mat4::identity();
-    mat4 modelviewProjMat = mat4::identity();
-
-    translateMat = translate(0.0f, 0.0f, -1.0f);
-
-    modelMat = modelMat * translateMat;
-    
-    modelviewProjMat = perspectiveProjectionMatrix * viewMat * modelMat;
-
-    glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, modelviewProjMat);
 
     glBindVertexArray(vao_quad);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, screenTexture);
     glUniform1i(samplerUniform, 0);
 
-    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 
     glBindVertexArray(0);
     glUseProgram(0);
@@ -633,6 +654,14 @@ void update() {
     if(fAngleCube >= 360.0f) {
         fAngleCube = 0.0f;
     } */
+}
+
+void glPrintError(char *strMsg) {
+    GLenum err;
+    while((err = glGetError()) != GL_NO_ERROR) {
+        fprintf(fptr, "glError: %s : [%d] %s \n", strMsg, err, glewGetErrorString( err ));
+        fflush(fptr);
+    }
 }
 
 void uninitialize() {
@@ -674,11 +703,6 @@ void uninitialize() {
             fprintf(fptr, "gProgramShaderObject: Shaders Detached Successfully!\n\n");
             fflush(fptr);
         }
-    }
-
-    if(vbo_texture_quad) {
-        glDeleteBuffers(1, &vbo_texture_quad);
-        vbo_texture_quad = 0;
     }
 
     if(vbo_position_quad) {
