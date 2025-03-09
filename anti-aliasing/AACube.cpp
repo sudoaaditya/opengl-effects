@@ -21,6 +21,7 @@ enum {
 };
 
 #pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "glu32.lib")
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "user32.lib")
 #pragma comment(lib, "gdi32.lib")
@@ -430,6 +431,8 @@ int initialize() {
     glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_POSITION, "aPosition");
     glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_TEXCOORD0, "aTexCoords");
 
+    glPrintError("433: Before BlitFramebuffer");
+
     // uniforms
     samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
 
@@ -504,11 +507,15 @@ int initialize() {
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    /* glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glPrintError("510: Before BlitFramebuffer");
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
- */
+
+    glPrintError("517: Before BlitFramebuffer");
+
     perspectiveProjectionMatrix = mat4::identity();
 
     resize(WIN_WIDTH, WIN_HEIGHT);
@@ -519,11 +526,16 @@ int initialize() {
 }
 
 void resize (int width, int height) {
+
+    void glPrintError(char *);
+
     if(height == 0) {
         height = 1;
     }
 
     glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+
+    // glPrintError("553");
 
     fprintf(fptr, "WIN WIDTH & HEIGHT %d, %d\n", width, height);
 
@@ -546,14 +558,20 @@ void display () {
 
     void glPrintError(char *);
 
+    glPrintError("551: glClearColor");
+
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // glPrintError("554: Before BlitFramebuffer");
 
     // Step 1: draw scene in multisampled buffer
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
+
+    // glPrintError("560: Before BlitFramebuffer");
 
     glUseProgram(gProgramShaderObject);
 
@@ -574,9 +592,13 @@ void display () {
     modelMat = modelMat * scaleMat;
     modelMat = modelMat * rotateMat;
 
+    // glPrintError("579: Before BlitFramebuffer");
+    
     glUniformMatrix4fv(modelUniform, 1, GL_FALSE, modelMat);
     glUniformMatrix4fv(viewUniform, 1, GL_FALSE, viewMat);
     glUniformMatrix4fv(projectionUniform, 1, GL_FALSE, perspectiveProjectionMatrix);
+
+    // glPrintError("581: Before BlitFramebuffer");
 
     glBindVertexArray(vao_cube);
     
@@ -597,7 +619,6 @@ void display () {
         fprintf(fptr, "ERROR: GL_READ_FRAMEBUFFER is not complete!\n");
         fflush(fptr);
     } 
-
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
     if (glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         fprintf(fptr, "ERROR: GL_DRAW_FRAMEBUFFER is not complete!\n");
@@ -659,7 +680,7 @@ void update() {
 void glPrintError(char *strMsg) {
     GLenum err;
     while((err = glGetError()) != GL_NO_ERROR) {
-        fprintf(fptr, "glError: %s : [%d] %s \n", strMsg, err, glewGetErrorString( err ));
+        fprintf(fptr, "glError: %s : [%d] %s \n", strMsg, err, gluErrorString( err ));
         fflush(fptr);
     }
 }

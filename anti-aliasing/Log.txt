@@ -25,867 +25,369 @@ Intermediate Framebuffer is complete!
 
 WIN WIDTH & HEIGHT 800, 600
 Initialization Successful!..
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-WIN WIDTH & HEIGHT 1536, 864
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-WIN WIDTH & HEIGHT 784, 561
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-WIN WIDTH & HEIGHT 800, 600
-WIN WIDTH & HEIGHT 1536, 864
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-glError: Step 2: Before BlitFramebuffer : [1282] Unknown error 
-WIN WIDTH & HEIGHT 784, 561
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
+glError: 551: glClearColor : [1282] invalid operation 
 Detached Shader: 2
 Detached Shader: 3
 gProgramShaderObject: Shaders Detached Successfully!
