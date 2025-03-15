@@ -59,6 +59,7 @@ GLuint screenTexture = 0;
 GLuint textureColorBufferMultiSampled = 0;
 
 unsigned int samples = 4;
+bool readpixels = true;
 
 Clock myClock;
 
@@ -633,30 +634,29 @@ void display () {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    glDisable(GL_DEPTH_TEST);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    if(!readpixels) {
+        glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
 
-    unsigned char *pixels;
-    pixels = (unsigned char *)malloc(3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
-    memset(pixels, 0, 3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
-    glReadPixels(0, 0, WIN_WIDTH, WIN_WIDTH, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+        unsigned char *pixels;
+        pixels = (unsigned char *)malloc(3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
+        memset(pixels, 0, 3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
+        glReadPixels(0, 0, WIN_WIDTH, WIN_WIDTH, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
-    /* if (pixels[0] == 0 && pixels[1] == 0 && pixels[2] == 0) {
-        fprintf(fptr, "Warning: MSAA FBO might be empty!!\n");
-        fflush(fptr);
-    } */
-    /* // print all pixels in file
-    for (int i = 0; i < 3 * WIN_WIDTH * WIN_HEIGHT; i++) {
-        fprintf(fptr, "%d ", pixels[i]);
-        fflush(fptr);
+        // print all pixels in file
+        for (int i = 0; i < 3 * WIN_WIDTH * WIN_HEIGHT; i++) {
+            fprintf(fptr, "%d ", pixels[i]);
+            fflush(fptr);
+        }
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        readpixels = true;
     }
- */
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glUseProgram(gProgramPostProcShaderObject);
 
     glBindVertexArray(vao_quad);
+    glDisable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, screenTexture);
     glUniform1i(samplerUniform, 0);
