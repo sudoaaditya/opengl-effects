@@ -92,10 +92,10 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
     GLint linked = 0;
     glGetProgramiv(program, GL_LINK_STATUS, &linked);
 
-    for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
+    /* for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
         glDeleteShader( entry->shader );
         entry->shader = 0;
-    }
+    } */
 
     if(!linked) {
         GLsizei len;

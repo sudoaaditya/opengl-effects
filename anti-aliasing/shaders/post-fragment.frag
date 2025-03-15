@@ -1,12 +1,23 @@
 #version 460 core
 
-in vec2 out_texCoords;
 out vec4 FragColor;
 
-uniform sampler2D screenTex;
+uniform sampler2DMS screenTex;
+uniform int toggleAliasing;
 
 void main(void) {
-    // vec3 color = texture(screenTex, out_texCoords).rgb;
-    // FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-    FragColor = texture(screenTex, out_texCoords);
+    
+    ivec2 texPos = ivec2(gl_FragCoord.x, gl_FragCoord.y);
+
+    vec4 color = texelFetch(screenTex, texPos, 0);
+
+    if(toggleAliasing == 1) {
+        vec4 sample1 = texelFetch(screenTex, texPos, 1);
+        vec4 sample2 = texelFetch(screenTex, texPos, 2);
+        vec4 sample3 = texelFetch(screenTex, texPos, 3);
+
+        color = (color + sample1 + sample2 + sample3) / 4.0;
+    }
+
+    FragColor = color;
 }

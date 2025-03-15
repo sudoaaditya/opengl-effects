@@ -1,3 +1,5 @@
 #include "AACube.h"
 
+TEXTURE_MARBLE BITMAP Marble.bmp
+
 ICON_MORPHED ICON morphed.ico 

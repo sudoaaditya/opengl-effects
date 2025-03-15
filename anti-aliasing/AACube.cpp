@@ -29,6 +29,7 @@ enum {
 // global variables
 bool gbFullScreen = false;
 bool gbActiveWindow = false;
+bool gbToggleAliasing = false;
 DWORD dwStyle = NULL;
 HWND ghwnd = NULL;
 HDC ghdc = NULL;
@@ -43,7 +44,7 @@ GLuint gProgramPostProcShaderObject = 0;
 mat4 perspectiveProjectionMatrix;
 GLfloat fAngleCube = 0.0f;
 GLuint vao_cube, vbo_position_cube, vbo_color_cube;
-GLuint vao_quad, vbo_position_quad;
+GLuint vao_quad, vbo_position_quad, vbo_texture_quad;
 
 // uniforms
 GLuint modelUniform;
@@ -51,6 +52,7 @@ GLuint viewUniform;
 GLuint projectionUniform;
 GLuint samplerUniform;
 GLuint mvpMatrixUniform;
+GLuint toggleAliasing;
 
 GLuint framebuffer = 0;
 GLuint renderbuffer = 0;
@@ -59,7 +61,6 @@ GLuint screenTexture = 0;
 GLuint textureColorBufferMultiSampled = 0;
 
 unsigned int samples = 4;
-bool readpixels = true;
 
 Clock myClock;
 
@@ -150,10 +151,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
         fprintf(fptr, "glewInit Failed!..\n");
         fflush(fptr);
         DestroyWindow(hwnd);
-    } else if(iRet == -6) {
-        fprintf(fptr, "Marble Texture Loading Failed!..\n");
-        fflush(fptr);
-        DestroyWindow(hwnd);
     } else {
         fprintf(fptr, "Initialization Successful!..\n");
         fflush(fptr);
@@ -226,6 +223,11 @@ LRESULT CALLBACK MyCallBack(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam) 
                     case 'f':
                     case 'F':
                         ToggleFullScreen();
+                        break;
+
+                    case 'a':
+                    case 'A':
+                        gbToggleAliasing = !gbToggleAliasing;
                         break;
 
                 }
@@ -436,27 +438,28 @@ int initialize() {
 
     // uniforms
     samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
+    mvpMatrixUniform = glGetUniformLocation(gProgramPostProcShaderObject, "mvpMatrix");
+    toggleAliasing = glGetUniformLocation(gProgramPostProcShaderObject, "toggleAliasing");
 
-    float rectangleVertices[] = {
-        //  Coords   // texCoords
-        1.0f, -1.0f,  1.0f, 0.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-        -1.0f,  1.0f,  0.0f, 1.0f,
-
-        1.0f,  1.0f,  1.0f, 1.0f,
-        1.0f, -1.0f,  1.0f, 0.0f,
-        -1.0f,  1.0f,  0.0f, 1.0f
-    };
+    float rectPosCoords[]  = { 1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f};
+    float rectTexCoords[]  = { 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
 
     glGenVertexArrays(1, &vao_quad);
-	glGenBuffers(1, &vbo_position_quad);
 	glBindVertexArray(vao_quad);
+
+    glGenBuffers(1, &vbo_position_quad);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_position_quad);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), &rectangleVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
-	glVertexAttribPointer(AMK_ATTRIBUTE_POSITION, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(AMK_ATTRIBUTE_TEXCOORD0);
-	glVertexAttribPointer(AMK_ATTRIBUTE_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+	glBufferData(GL_ARRAY_BUFFER, sizeof(rectPosCoords), &rectPosCoords, GL_STATIC_DRAW);
+    glVertexAttribPointer(AMK_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray(AMK_ATTRIBUTE_POSITION);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glGenBuffers(1, &vbo_texture_quad);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_texture_quad);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectTexCoords), rectTexCoords, GL_STATIC_DRAW);
+    glVertexAttribPointer(AMK_ATTRIBUTE_TEXCOORD0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray(AMK_ATTRIBUTE_TEXCOORD0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); 
 
     glBindVertexArray(0);
 
@@ -485,35 +488,10 @@ int initialize() {
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    // Create intermediate fbo aka second post processing frame buffer
-    glGenFramebuffers(1, &intermediateFBO);
-    glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
-    // create color attachment texture
-    glGenTextures(1, &screenTexture);
-    glBindTexture(GL_TEXTURE_2D, screenTexture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WIN_WIDTH, WIN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenTexture, 0);
-
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        fprintf(fptr, "ERROR: Intermediate Framebuffer is not complete!\n");
-        fflush(fptr);
-    } else {
-        fprintf(fptr, "Intermediate Framebuffer is complete!\n\n");
-        fflush(fptr);
-    }
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    glPrintError("510: Before BlitFramebuffer");
-
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClearDepth(1.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearDepth(1.0f);
 
     glPrintError("517: Before BlitFramebuffer");
 
@@ -585,9 +563,9 @@ void display () {
     translateMat = translate(0.0f, 0.0f, -7.0f);
     scaleMat = scale(1.2f, 1.2f, 1.2f);
 
-    rotateMat = rotate(45.0f, 1.0f, 0.0f, 0.0f);
-    rotateMat *= rotate(45.0f, 0.0f, 1.0f, 0.0f);
-    // rotateMat *= rotate(fAngleCube, 0.0f, 0.0f, 1.0f);
+    rotateMat = rotate(fAngleCube, 1.0f, 0.0f, 0.0f);
+    rotateMat *= rotate(fAngleCube, 0.0f, 1.0f, 0.0f);
+    rotateMat *= rotate(fAngleCube, 0.0f, 0.0f, 1.0f);
 
     modelMat = modelMat * translateMat;
     modelMat = modelMat * scaleMat;
@@ -614,54 +592,34 @@ void display () {
     glUseProgram(0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    // Step 2: now bilt multisampled buffer to normal color buffer of intermediate FBO, image is stored in screen texture!
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
-    if (glCheckFramebufferStatus(GL_READ_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        fprintf(fptr, "ERROR: GL_READ_FRAMEBUFFER is not complete!\n");
-        fflush(fptr);
-    } 
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
-    if (glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        fprintf(fptr, "ERROR: GL_DRAW_FRAMEBUFFER is not complete!\n");
-        fflush(fptr);
-    } 
-    glPrintError("Step 2: Before BlitFramebuffer");
-    glBlitFramebuffer(0, 0, WIN_WIDTH, WIN_HEIGHT, 0, 0, WIN_WIDTH, WIN_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-    glPrintError("Step 2: After BlitFramebuffer");
-
     // Step 3: Now render quad with scene's visual as it's texture
     glUseProgram(0);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    if(!readpixels) {
-        glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
+    glUseProgram(gProgramPostProcShaderObject);    
 
-        unsigned char *pixels;
-        pixels = (unsigned char *)malloc(3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
-        memset(pixels, 0, 3 * WIN_WIDTH * WIN_HEIGHT * sizeof(unsigned char));
-        glReadPixels(0, 0, WIN_WIDTH, WIN_WIDTH, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    modelMat = mat4::identity();
+    viewMat = mat4::identity();
+    translateMat = mat4::identity();
 
-        // print all pixels in file
-        for (int i = 0; i < 3 * WIN_WIDTH * WIN_HEIGHT; i++) {
-            fprintf(fptr, "%d ", pixels[i]);
-            fflush(fptr);
-        }
+    translateMat = translate(0.0f, 0.0f, -3.0f);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        readpixels = true;
-    }
+    modelMat = perspectiveProjectionMatrix * viewMat * translateMat;
 
-    glUseProgram(gProgramPostProcShaderObject);
+    glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, modelMat);
 
-    glBindVertexArray(vao_quad);
     glDisable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, screenTexture);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
     glUniform1i(samplerUniform, 0);
 
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glUniform1i(toggleAliasing, gbToggleAliasing ? 1 : 0);
+
+    glBindVertexArray(vao_quad);
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     glBindVertexArray(0);
     glUseProgram(0);
@@ -670,11 +628,11 @@ void display () {
 }
 
 void update() {
-    /* float elapsedTime = (float) myClock.getElapsedTime();
+    float elapsedTime = (float) myClock.getElapsedTime();
     fAngleCube = fmod((elapsedTime * 30.0f), 360.0f);
     if(fAngleCube >= 360.0f) {
         fAngleCube = 0.0f;
-    } */
+    }
 }
 
 void glPrintError(char *strMsg) {
