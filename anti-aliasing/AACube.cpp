@@ -497,7 +497,7 @@ int initialize() {
 
     perspectiveProjectionMatrix = mat4::identity();
 
-    resize(WIN_WIDTH, WIN_HEIGHT);
+    // resize(WIN_WIDTH, WIN_HEIGHT);
 
     myClock.start();
 
@@ -517,6 +517,7 @@ void resize (int width, int height) {
     // glPrintError("553");
 
     fprintf(fptr, "WIN WIDTH & HEIGHT %d, %d\n", width, height);
+    fflush(fptr);
 
     perspectiveProjectionMatrix = perspective(
         45.0f,
@@ -524,6 +525,42 @@ void resize (int width, int height) {
         0.1f,
         100.0f
     );
+
+    // Recreate framebuffer with the new size
+    if (framebuffer != 0) {
+        glDeleteFramebuffers(1, &framebuffer);
+        glDeleteRenderbuffers(1, &renderbuffer);
+        glDeleteTextures(1, &textureColorBufferMultiSampled);
+    }
+
+    // Generate a new framebuffer
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+    // Create a multisampled texture for color attachment
+    glGenTextures(1, &textureColorBufferMultiSampled);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
+    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);
+    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+
+    // Attach texture to framebuffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
+
+    // Create a renderbuffer for depth and stencil attachment
+    glGenRenderbuffers(1, &renderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+    glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_DEPTH24_STENCIL8, width, height);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    // Attach renderbuffer to framebuffer
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        fprintf(fptr, "ERROR::FRAMEBUFFER:: Framebuffer is not complete!\n");
+        fflush(fptr);
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void display () {
