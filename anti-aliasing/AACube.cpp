@@ -531,36 +531,43 @@ void resize (int width, int height) {
         glDeleteFramebuffers(1, &framebuffer);
         glDeleteRenderbuffers(1, &renderbuffer);
         glDeleteTextures(1, &textureColorBufferMultiSampled);
+        framebuffer = 0;
+        renderbuffer = 0;
+        textureColorBufferMultiSampled = 0;
     }
 
-    // Generate a new framebuffer
-    glGenFramebuffers(1, &framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
-    // Create a multisampled texture for color attachment
-    glGenTextures(1, &textureColorBufferMultiSampled);
-    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
-    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);
-    glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-
-    // Attach texture to framebuffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
-
-    // Create a renderbuffer for depth and stencil attachment
-    glGenRenderbuffers(1, &renderbuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
-    glRenderbufferStorageMultisample(GL_RENDERBUFFER, samples, GL_DEPTH24_STENCIL8, width, height);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-    // Attach renderbuffer to framebuffer
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        fprintf(fptr, "ERROR::FRAMEBUFFER:: Framebuffer is not complete!\n");
+    if(framebuffer == 0) {
+        fprintf(fptr, "In to resize FBO\n");
         fflush(fptr);
-    }
 
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        // Configure MSAA framebuffer
+        glGenFramebuffers(1, &framebuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+        fprintf(fptr, "After Bind Fbo\n");
+        fflush(fptr);
+        // Create a multisampled color attachment texture
+        glGenTextures(1, &textureColorBufferMultiSampled);
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
+        // Create a multisampled renderbuffer for depth and stencil attachments
+        glGenRenderbuffers(1, &renderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
+        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, width, height);
+        // glBindRenderbuffer(GL_RENDERBUFFER, 0);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+            fprintf(fptr, "ERROR: Framebuffer is not complete!\n");
+            fflush(fptr);
+        } else {
+            fprintf(fptr, "\nFramebuffer resize is complete!\n");
+            fflush(fptr);
+        }
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
 }
 
 void display () {

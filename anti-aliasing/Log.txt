@@ -1,2 +1,3 @@
 Log file created successfully
 WIN WIDTH & HEIGHT 784, 561
+In to resize FBO
