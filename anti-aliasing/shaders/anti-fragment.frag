@@ -6,6 +6,6 @@ precision lowp int;
 in vec4 out_color;
 out vec4 FragColor;
 
-void main (void) {
+void main(void) {
     FragColor = out_color;
 }

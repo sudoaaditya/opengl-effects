@@ -9,11 +9,9 @@ uniform mat4 u_projMatrix;
 
 out vec4 out_color;
 
-void main (void) {
+void main(void) {
 
     gl_Position = u_projMatrix * u_viewMatrix * u_modelMatrix * vPosition;
-    
+
     out_color = vColor;
 }
-
-

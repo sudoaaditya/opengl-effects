@@ -1,3 +1,34 @@
 Log file created successfully
-WIN WIDTH & HEIGHT 784, 561
-In to resize FBO
+Choose Pixel Format Successful!!..	{Index = 10}
+SetPixelFormat Successful!
+wglCreateContext Successsful!!..
+wglMakeCurrent Successful!.
+glewInit Successful!..
+
+LoadShaders
+File opened ./shaders/anti-vertex.vert 
+Shader compilation successful: ( ./shaders/anti-vertex.vert )
+File opened ./shaders/anti-fragment.frag 
+Shader compilation successful: ( ./shaders/anti-fragment.frag )
+Program linkage successful
+
+LoadShaders
+File opened ./shaders/post-vertex.vert 
+Shader compilation successful: ( ./shaders/post-vertex.vert )
+File opened ./shaders/post-fragment.frag 
+Shader compilation successful: ( ./shaders/post-fragment.frag )
+Program linkage successful
+FBO Width: 1536, Height: 864
+
+Framebuffer is complete!
+Initialization Successful!..
+Detached Shader: 2
+Detached Shader: 3
+gProgramShaderObject: Shaders Detached Successfully!
+
+Detached Shader: 5
+Detached Shader: 6
+gProgramPostProcShaderObject: Shaders Detached Successfully!
+
+
+File Closed Successfully!!..

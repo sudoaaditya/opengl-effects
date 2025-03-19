@@ -6,7 +6,7 @@ uniform sampler2DMS screenTex;
 uniform int toggleAliasing;
 
 void main(void) {
-    
+
     ivec2 texPos = ivec2(gl_FragCoord.x, gl_FragCoord.y);
 
     vec4 color = texelFetch(screenTex, texPos, 0);

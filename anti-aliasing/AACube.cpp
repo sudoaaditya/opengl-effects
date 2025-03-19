@@ -159,7 +159,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
     ShowWindow(hwnd, iCmdShow);
     SetFocus(hwnd);
     SetForegroundWindow(hwnd);
-    // ToggleFullScreen();
+    ToggleFullScreen();
 
     while(!bDone) {
         if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -300,7 +300,7 @@ int initialize() {
     void resize(int,int);
     void uninitialize(void);
     BOOL loadTexture(GLuint*, TCHAR[]);
-    void glPrintError(char *);
+    // void glPrintError(char *);
 
     PIXELFORMATDESCRIPTOR pfd;
     int iPixelFormatIndex = 0;
@@ -434,7 +434,7 @@ int initialize() {
     glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_POSITION, "aPosition");
     glBindAttribLocation(gProgramPostProcShaderObject, AMK_ATTRIBUTE_TEXCOORD0, "aTexCoords");
 
-    glPrintError("433: Before BlitFramebuffer");
+    // glPrintError("433: Before BlitFramebuffer");
 
     // uniforms
     samplerUniform = glGetUniformLocation(gProgramPostProcShaderObject, "screenTex");
@@ -463,19 +463,26 @@ int initialize() {
 
     glBindVertexArray(0);
 
+    // FBO MAX SIZES
+    int maxWidth = GetSystemMetrics(SM_CXSCREEN);
+    int maxHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    fprintf(fptr, "FBO Width: %d, Height: %d\n", maxWidth, maxHeight);  
+    fflush(fptr);
+
     // Configure MSAA framebuffer
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
     // Create a multisampled color attachment texture
     glGenTextures(1, &textureColorBufferMultiSampled);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
-    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, WIN_WIDTH, WIN_HEIGHT, GL_TRUE);
+    glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, maxWidth, maxHeight, GL_TRUE);
     glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
     // Create a multisampled renderbuffer for depth and stencil attachments
     glGenRenderbuffers(1, &renderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
-    glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, WIN_WIDTH, WIN_HEIGHT);
+    glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, maxWidth, maxHeight);
     // glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
 
@@ -493,7 +500,7 @@ int initialize() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepth(1.0f);
 
-    glPrintError("517: Before BlitFramebuffer");
+    // glPrintError("517: Before BlitFramebuffer");
 
     perspectiveProjectionMatrix = mat4::identity();
 
@@ -506,7 +513,7 @@ int initialize() {
 
 void resize (int width, int height) {
 
-    void glPrintError(char *);
+    // void glPrintError(char *);
 
     if(height == 0) {
         height = 1;
@@ -515,9 +522,8 @@ void resize (int width, int height) {
     glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
     // glPrintError("553");
-
-    fprintf(fptr, "WIN WIDTH & HEIGHT %d, %d\n", width, height);
-    fflush(fptr);
+    // fprintf(fptr, "WIN WIDTH & HEIGHT %d, %d\n", width, height);
+    // fflush(fptr);
 
     perspectiveProjectionMatrix = perspective(
         45.0f,
@@ -525,49 +531,6 @@ void resize (int width, int height) {
         0.1f,
         100.0f
     );
-
-    // Recreate framebuffer with the new size
-    if (framebuffer != 0) {
-        glDeleteFramebuffers(1, &framebuffer);
-        glDeleteRenderbuffers(1, &renderbuffer);
-        glDeleteTextures(1, &textureColorBufferMultiSampled);
-        framebuffer = 0;
-        renderbuffer = 0;
-        textureColorBufferMultiSampled = 0;
-    }
-
-    if(framebuffer == 0) {
-        fprintf(fptr, "In to resize FBO\n");
-        fflush(fptr);
-
-        // Configure MSAA framebuffer
-        glGenFramebuffers(1, &framebuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-        fprintf(fptr, "After Bind Fbo\n");
-        fflush(fptr);
-        // Create a multisampled color attachment texture
-        glGenTextures(1, &textureColorBufferMultiSampled);
-        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled);
-        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_RGB, width, height, GL_TRUE);
-        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, textureColorBufferMultiSampled, 0);
-        // Create a multisampled renderbuffer for depth and stencil attachments
-        glGenRenderbuffers(1, &renderbuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, renderbuffer);
-        glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_DEPTH24_STENCIL8, width, height);
-        // glBindRenderbuffer(GL_RENDERBUFFER, 0);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderbuffer);
-
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-            fprintf(fptr, "ERROR: Framebuffer is not complete!\n");
-            fflush(fptr);
-        } else {
-            fprintf(fptr, "\nFramebuffer resize is complete!\n");
-            fflush(fptr);
-        }
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    }
 }
 
 void display () {
@@ -579,9 +542,9 @@ void display () {
     mat4 rotateMat;
     mat4 scaleMat;
 
-    void glPrintError(char *);
+    // void glPrintError(char *);
 
-    glPrintError("551: glClearColor");
+    // glPrintError("551: glClearColor");
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
