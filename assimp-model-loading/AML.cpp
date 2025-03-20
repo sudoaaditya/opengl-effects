@@ -511,38 +511,14 @@ void uninitialize() {
 
 
     if(gProgramShaderObject) {
-        GLsizei iShaderCnt = 0;
-        GLsizei iShaderNo = 0;
-
-        glUseProgram(gProgramShaderObject);
-
-        glGetProgramiv(
-            gProgramShaderObject,
-            GL_ATTACHED_SHADERS,
-            &iShaderCnt
-        );
-
-        GLuint *pShaders = (GLuint*)malloc(iShaderCnt * sizeof(GLuint));
-
-        if(pShaders) {
-            glGetAttachedShaders(
-                gProgramShaderObject,
-                iShaderCnt, 
-                &iShaderCnt, 
-                pShaders
-            );
-
-            for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
-                glDetachShader(gProgramShaderObject, pShaders[iShaderNo]);
-                fprintf(fptr, "Detached Shader: %ld\n", pShaders[iShaderNo]);
-                pShaders[iShaderNo] = 0;
-            }
-            free(pShaders);
+        GLuint iRet = DetachShaders(gProgramShaderObject, fptr);
+        if(iRet != 0) {
+            fprintf(fptr, "gProgramShaderObject: Failed to Detach Shaders!\n");
+            fflush(fptr);
+        } else {
+            fprintf(fptr, "gProgramShaderObject: Shaders Detached Successfully!\n\n");
+            fflush(fptr);
         }
-
-        glDeleteProgram(gProgramShaderObject);
-        gProgramShaderObject = 0;
-        glUseProgram(0);
     }
 
     if(ghrc == wglGetCurrentContext()) {

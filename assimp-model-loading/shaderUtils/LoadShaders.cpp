@@ -18,9 +18,11 @@ static const GLchar* ReadShader (const char *filename, FILE *fptr) {
 
     if(infile == NULL) {
         fprintf(fptr, "Uable to open file %s \n", filename);
+        fflush(fptr);
         return NULL;        
     } else {
         fprintf(fptr, "File opened %s \n", filename);
+        fflush(fptr);
     }
 
     fseek(infile, 0, SEEK_END);
@@ -42,6 +44,9 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
     if(shaders == NULL) {
         return 0;
     }
+
+    fprintf(fptr, "\nLoadShaders\n");
+    fflush(fptr);
 
     GLuint program = glCreateProgram();
 
@@ -77,10 +82,12 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
             GLchar *log = new GLchar[len+1];
             glGetShaderInfoLog(shader, len, &len, log);
             fprintf(fptr, "Shader compilation failed: ( %s ) -> %s \n", entry->filename, log);
+            fflush(fptr);
             delete [] log;
             return 0;
         } else {
             fprintf(fptr, "Shader compilation successful: ( %s )\n", entry->filename);
+            fflush(fptr);
         }
 
         glAttachShader(program, shader);
@@ -92,10 +99,10 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
     GLint linked = 0;
     glGetProgramiv(program, GL_LINK_STATUS, &linked);
 
-    /* for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
+    for ( entry = shaders; entry->type != GL_NONE; ++entry ) {
         glDeleteShader( entry->shader );
         entry->shader = 0;
-    } */
+    }
 
     if(!linked) {
         GLsizei len;
@@ -104,13 +111,59 @@ GLuint LoadShaders (ShaderInfo *shaders, FILE *fptr) {
         GLchar *log = new GLchar[len + 1];
         glGetProgramInfoLog(program, len, &len, log);
         fprintf(fptr, "Program linkage failed: %s \n", log);
+        fflush(fptr);
         delete [] log;
         return 0;
     } else {
         fprintf(fptr, "Program linkage successful\n");
+        fflush(fptr);
     }
 
     return program;
+}
+
+GLuint DetachShaders(GLuint program, FILE *fptr) {
+    if(!program) {
+        return -1;
+    }
+
+    fprintf(fptr, "\n");
+    fflush(fptr);
+
+    GLsizei iShaderCnt = 0;
+    GLsizei iShaderNo = 0;
+
+    glUseProgram(program);
+
+    glGetProgramiv(
+        program,
+        GL_ATTACHED_SHADERS,
+        &iShaderCnt
+    );
+
+    GLuint *pShaders = (GLuint*)malloc(iShaderCnt * sizeof(GLuint));
+
+    if(pShaders) {
+        glGetAttachedShaders(
+            program,
+            iShaderCnt, 
+            &iShaderCnt, 
+            pShaders
+        );
+
+        for(iShaderNo = 0; iShaderNo < iShaderCnt; iShaderNo++) {
+            glDetachShader(program, pShaders[iShaderNo]);
+            fprintf(fptr, "Detached Shader: %ld\n", pShaders[iShaderNo]);
+            fflush(fptr);
+            pShaders[iShaderNo] = 0;
+        }
+        free(pShaders);
+    }
+
+    glDeleteProgram(program);
+    glUseProgram(0);
+
+    return 0;
 }
 
 #ifdef __cplusplus
